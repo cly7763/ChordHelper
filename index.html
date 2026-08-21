@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChordHelper - DMK Studio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      padding: 10px 20px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+      z-index: 10;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .studio-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #0f172a;
+      padding: 3px 8px;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .ctrl-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0f172a;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+    select {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #475569;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+    }
+    .ctrl-box input[type="range"] {
+      width: 80px;
+      accent-color: #38bdf8;
+      cursor: pointer;
+    }
+    .bpm-val {
+      font-weight: 700;
+      color: #38bdf8;
+      width: 24px;
+      text-align: right;
+    }
+    button {
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    button:hover {
+      background: #7dd3fc;
+    }
+    button.secondary {
+      background: #334155;
+      color: #f8fafc;
+    }
+    button.secondary:hover {
+      background: #475569;
+    }
+    button.stop-btn {
+      background: #ef4444;
+      color: #ffffff;
+    }
+    button.stop-btn:hover {
+      background: #f87171;
+    }
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    #main-container {
+      display: flex;
+      flex: 1;
+      position: relative;
+    }
+    #canvas-container {
+      flex: 1;
+      position: relative;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    }
+    #sidebar {
+      width: 320px;
+      background: #1e293b;
+      border-left: 1px solid #334155;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: -4px 0 16px rgba(0,0,0,0.3);
+      justify-content: space-between;
+    }
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel-section {
+      background: #0f172a;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .panel-section h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .chord-name {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chord-role {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .role-tonic { background: #065f46; color: #34d399; }
+    .role-subdominant { background: #1e40af; color: #60a5fa; }
+    .role-dominant { background: #991b1b; color: #f87171; }
+    .role-secondary { background: #854d0e; color: #facc15; }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      background: #334155;
+      border-radius: 4px;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .tag:hover {
+      background: #475569;
+      color: #f8fafc;
+    }
+    .tag.active {
+      background: #0ea5e9;
+      color: #0f172a;
+      font-weight: bold;
+      border-color: #38bdf8;
+    }
+    .progression-list {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      min-height: 44px;
+      align-items: center;
+    }
+    .prog-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: #334155;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .prog-item:hover {
+      background: #475569;
+      border-color: #ef4444;
+    }
+    .prog-item.active {
+      background: #38bdf8;
+      color: #0f172a;
+      transform: scale(1.05);
+    }
+    .prog-item-del {
+      font-size: 0.8rem;
+      line-height: 1;
+      color: #94a3b8;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .prog-item:hover .prog-item-del {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: #64748b;
+      line-height: 1.4;
+    }
+    .footer-brand {
+      border-top: 1px solid #334155;
+      padding-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #64748b;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .footer-brand b {
+      color: #94a3b8;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-group">
+      <div class="title">ChordHelper</div>
+      <span class="studio-badge">DMK STUDIO</span>
+    </div>
+
+    <div class="controls">
+      <div class="ctrl-box">
+        <span>Key</span>
+        <select id="key-select">
+          <option value="0">C</option>
+          <option value="1">Db</option>
+          <option value="2">D</option>
+          <option value="3">Eb</option>
+          <option value="4">E</option>
+          <option value="5">F</option>
+          <option value="6">F#</option>
+          <option value="7">G</option>
+          <option value="8">Ab</option>
+          <option value="9">A</option>
+          <option value="10">Bb</option>
+          <option value="11">B</option>
+        </select>
+      </div>
+      <div class="ctrl-box">
+        <span>BPM</span>
+        <input type="range" id="bpm-slider" min="40" max="200" value="90" />
+        <span class="bpm-val" id="bpm-text">90</span>
+      </div>
+      <button class="secondary" id="btn-reset">진행 초기화</button>
+      <button id="btn-play">진행 재생 🎵</button>
+      <button class="stop-btn" id="btn-stop" disabled>정지 ⏹</button>
+    </div>
+  </header>
+
+  <div id="main-container">
+    <div id="canvas-container">
+      <canvas id="graph"></canvas>
+    </div>
+
+    <div id="sidebar">
+      <div class="sidebar-content">
+        <div class="panel-section">
+          <h3>선택된 코드 정보</h3>
+          <div class="chord-name">
+            <span id="info-name">-</span>
+            <span id="info-role" class="chord-role" style="display: none;">-</span>
+          </div>
+          <p id="info-desc" style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">원하는 코드를 먼저 클릭하세요.</p>
+        </div>
+
+        <div class="panel-section">
+          <h3>추천 텐션 (클릭하여 추가)</h3>
+          <div class="tag-container" id="info-tensions">
+            <span class="tag" style="cursor: default;">노드를 먼저 선택하세요</span>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>빌드된 코드 진행</h3>
+          <div class="progression-list" id="prog-container"></div>
+        </div>
+
+      </div>
+
+      <div class="footer-brand">
+        <span>Powered by <b>DMK STUDIO</b></span>
+        <span>v1.0.0</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const NOTE_NAMES = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
+    let currentKeyOffset = 0;
+
+    const TENSION_SEMITONES = {
+      "9": 14,
+      "b9": 13,
+      "#9": 15,
+      "11": 17,
+      "#11": 18,
+      "13": 21,
+      "b13": 20
+    };
+
+    const BASE_HARMONY = {
+      "Imaj7": {
+        id: "Imaj7",
+        rootInterval: 0,
+        suffix: "maj7",
+        deg: "Imaj7",
+        role: "Tonic",
+        desc: "기본 으뜸화음 (안정감)",
+        tensions: ["9", "13", "#11"],
+        upperIntervals: [0, 4, 7, 11],
+        transitions: [
+          { targetId: "iim7", label: "서브도미넌트 대리 (ii)" },
+          { targetId: "IVmaj7", label: "서브도미넌트 (IV)" },
+          { targetId: "V7_ii", label: "세컨더리 도미넌트 (V/ii)" },
+          { targetId: "V7_vi", label: "세컨더리 도미넌트 (V/vi)" },
+          { targetId: "V7", label: "도미넌트 (V)" }
+        ]
+      },
+      "iim7": {
+        id: "iim7",
+        rootInterval: 2,
+        suffix: "m7",
+        deg: "iim7",
+        role: "Subdominant",
+        desc: "2도 마이너, ii-V 진행의 시작점",
+        tensions: ["9", "11"],
+        upperIntervals: [0, 3, 7, 10],
+        transitions: [
+          { targetId: "V7", label: "도미넌트 모션 (V7)" }
+        ]
+      },
+      "iiim7": {
+        id: "iiim7",
+        rootInterval: 4,
+        suffix: "m7",
+        deg: "iiim7",
+        role: "Tonic",
+        desc: "토닉 대리 화음 (약한 안정감)",
+        tensions: ["9", "11"],
+        upperIntervals: [0, 3, 7, 10],
+        transitions: [
+          { targetId: "vim7", label: "vi 진행" },
+          { targetId: "IVmaj7", label: "서브도미넌트 (IV)" },
+          { targetId: "V7_ii", label: "세컨더리 도미넌트 (V/ii)" }
+        ]
+      },
+      "IVmaj7": {
+        id: "IVmaj7",
+        rootInterval: 5,
+        suffix: "maj7",
+        deg: "IVmaj7",
+        role: "Subdominant",
+        desc: "밝은 발전감과 이동감을 제공",
+        tensions: ["9", "#11", "13"],
+        upperIntervals: [0, 4, 7, 11],
+        transitions: [
+          { targetId: "V7", label: "도미넌트 (V7)" },
+          { targetId: "iiim7", label: "토닉 대리 (iii)" }
+        ]
+      },
+      "V7": {
+        id: "V7",
+        rootInterval: 7,
+        suffix: "7",
+        deg: "V7",
+        role: "Dominant",
+        desc: "강한 긴장감 및 I로 해결하려는 성질",
+        tensions: ["9", "b9", "#9", "#11", "b13", "13"],
+        upperIntervals: [0, 4, 7, 10],
+        transitions: [
+          { targetId: "Imaj7", label: "토닉 해결 (Authentic)" },
+          { targetId: "vim7", label: "거짓마침 (Deceptive)" }
+        ]
+      },
+      "vim7": {
+        id: "vim7",
+        rootInterval: 9,
+        suffix: "m7",
+        deg: "vim7",
+        role: "Tonic",
+        desc: "토닉 대리 (평행단조 으뜸화음)",
+        tensions: ["9", "11"],
+        upperIntervals: [0, 3, 7, 10],
+        transitions: [
+          { targetId: "iim7", label: "ii 진행" },
+          { targetId: "V7_V", label: "세컨더리 도미넌트 (V/V)" },
+          { targetId: "IVmaj7", label: "서브도미넌트 (IV)" }
+        ]
+      },
+      "V7_ii": {
+        id: "V7_ii",
+        rootInterval: 9,
+        suffix: "7",
+        deg: "V7/ii",
+        role: "Secondary Dominant",
+        desc: "iim7으로 강력히 향하는 세컨더리 화음",
+        tensions: ["b9", "#9", "b13"],
+        upperIntervals: [0, 4, 7, 10],
+        transitions: [
+          { targetId: "iim7", label: "목표 해결 (-> ii)" }
+        ]
+      },
+      "V7_V": {
+        id: "V7_V",
+        rootInterval: 2,
+        suffix: "7",
+        deg: "V7/V",
+        role: "Secondary Dominant",
+        desc: "V7으로 강력히 향하는 세컨더리 화음",
+        tensions: ["9", "#11", "13"],
+        upperIntervals: [0, 4, 7, 10],
+        transitions: [
+          { targetId: "V7", label: "도미넌트 해결 (-> V)" }
+        ]
+      },
+      "V7_vi": {
+        id: "V7_vi",
+        rootInterval: 4,
+        suffix: "7",
+        deg: "V7/vi",
+        role: "Secondary Dominant",
+        desc: "vim7으로 향하는 화음",
+        tensions: ["b9", "b13"],
+        upperIntervals: [0, 4, 7, 10],
+        transitions: [
+          { targetId: "vim7", label: "목표 해결 (-> vi)" }
+        ]
+      }
+    };
+
+    function midiToFreq(midi) {
+      return 440 * Math.pow(2, (midi - 69) / 12);
+    }
+
+    function getChordName(rootInterval, suffix) {
+      const noteIdx = (currentKeyOffset + rootInterval) % 12;
+      return NOTE_NAMES[noteIdx] + suffix;
+    }
+
+    function calculateVoicing(chordRootMidi, upperIntervals, activeTensions = []) {
+      const notes = [];
+      let bassMidi = (chordRootMidi % 12) + 36;
+      notes.push(midiToFreq(bassMidi));
+
+      let rawUpperMidis = upperIntervals.map(semi => chordRootMidi + semi);
+      
+      activeTensions.forEach(t => {
+        if (TENSION_SEMITONES[t]) {
+          rawUpperMidis.push(chordRootMidi + TENSION_SEMITONES[t]);
+        }
+      });
+
+      rawUpperMidis.forEach(midi => {
+        let normalized = midi;
+        while (normalized < 55) normalized += 12;
+        while (normalized > 75) normalized -= 12;
+        notes.push(midiToFreq(normalized));
+      });
+
+      return [...new Set(notes)].sort((a, b) => a - b);
+    }
+
+    function buildRuntimeChordData() {
+      const data = {};
+      const baseMidiC3 = 48;
+      const tonicMidi = baseMidiC3 + currentKeyOffset;
+
+      Object.keys(BASE_HARMONY).forEach(id => {
+        const item = BASE_HARMONY[id];
+        const chordRootMidi = tonicMidi + item.rootInterval;
+        const name = getChordName(item.rootInterval, item.suffix);
+        const notes = calculateVoicing(chordRootMidi, item.upperIntervals);
+
+        data[id] = {
+          ...item,
+          name: name,
+          chordRootMidi: chordRootMidi,
+          notes: notes
+        };
+      });
+      return data;
+    }
+
+    let CHORD_DATA = buildRuntimeChordData();
+    let selectedChordId = null; // 초기 강제 선택 없음
+    let progression = [];       // 빈 배열로 시작
+    let bpm = 90;
+
+    const canvas = document.getElementById("graph");
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    const nodes = {};
+    const harmonyIds = Object.keys(BASE_HARMONY);
+
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let activeNodes = [];
+    let playbackTimeouts = [];
+    let isPlaying = false;
+
+    function resize() {
+      width = canvas.width = canvas.parentElement.clientWidth;
+      height = canvas.height = canvas.parentElement.clientHeight;
+      calculatePositions();
+      draw();
+    }
+
+    function calculatePositions() {
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = Math.min(width, height) * 0.36;
+
+      harmonyIds.forEach((id, idx) => {
+        const angle = (idx / harmonyIds.length) * Math.PI * 2 - Math.PI / 2;
+        nodes[id] = {
+          x: centerX + Math.cos(angle) * radius,
+          y: centerY + Math.sin(angle) * radius,
+          r: 36,
+          id: id
+        };
+      });
+    }
+
+    function getRoleColor(role) {
+      switch (role) {
+        case "Tonic": return "#10b981";
+        case "Subdominant": return "#3b82f6";
+        case "Dominant": return "#ef4444";
+        case "Secondary Dominant": return "#eab308";
+        default: return "#64748b";
+      }
+    }
+
+    function drawArrow(x1, y1, x2, y2, label, isHighlight) {
+      const headlen = 10;
+      const angle = Math.atan2(y2 - y1, x2 - x1);
+      const offset = 38;
+      const startX = x1 + Math.cos(angle) * offset;
+      const startY = y1 + Math.sin(angle) * offset;
+      const endX = x2 - Math.cos(angle) * offset;
+      const endY = y2 - Math.sin(angle) * offset;
+
+      ctx.save();
+      ctx.strokeStyle = isHighlight ? "#38bdf8" : "rgba(100, 116, 139, 0.25)";
+      ctx.lineWidth = isHighlight ? 2.5 : 1;
+      ctx.setLineDash(isHighlight ? [] : [4, 4]);
+
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+
+      if (isHighlight) {
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath();
+        ctx.moveTo(endX, endY);
+        ctx.lineTo(endX - headlen * Math.cos(angle - Math.PI / 6), endY - headlen * Math.sin(angle - Math.PI / 6));
+        ctx.lineTo(endX - headlen * Math.cos(angle + Math.PI / 6), endY - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.closePath();
+        ctx.fill();
+
+        const midX = (startX + endX) / 2;
+        const midY = (startY + endY) / 2;
+        ctx.font = "11px sans-serif";
+        const textWidth = ctx.measureText(label).width;
+
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(midX - textWidth / 2 - 4, midY - 9, textWidth + 8, 18);
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(midX - textWidth / 2 - 4, midY - 9, textWidth + 8, 18);
+
+        ctx.fillStyle = "#f8fafc";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(label, midX, midY);
+      }
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      const currentHarmony = selectedChordId ? CHORD_DATA[selectedChordId] : null;
+
+      harmonyIds.forEach(id => {
+        const n = nodes[id];
+        const data = CHORD_DATA[id];
+        data.transitions.forEach(t => {
+          if (nodes[t.targetId] && id !== selectedChordId) {
+            drawArrow(n.x, n.y, nodes[t.targetId].x, nodes[t.targetId].y, t.label, false);
+          }
+        });
+      });
+
+      if (currentHarmony) {
+        currentHarmony.transitions.forEach(t => {
+          if (nodes[t.targetId]) {
+            drawArrow(nodes[selectedChordId].x, nodes[selectedChordId].y, nodes[t.targetId].x, nodes[t.targetId].y, t.label, true);
+          }
+        });
+      }
+
+      harmonyIds.forEach(id => {
+        const n = nodes[id];
+        const data = CHORD_DATA[id];
+        const isSelected = id === selectedChordId;
+        const isTarget = currentHarmony && currentHarmony.transitions.some(t => t.targetId === id);
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+
+        ctx.fillStyle = isSelected ? "#38bdf8" : (isTarget ? "#1e293b" : "#0f172a");
+        ctx.fill();
+
+        ctx.lineWidth = isSelected ? 4 : (isTarget ? 2 : 1.5);
+        ctx.strokeStyle = isSelected ? "#ffffff" : getRoleColor(data.role);
+        ctx.stroke();
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = isSelected ? "#0f172a" : "#f8fafc";
+        ctx.font = "bold 13px sans-serif";
+        ctx.fillText(data.name, n.x, n.y - 4);
+
+        ctx.font = "10px sans-serif";
+        ctx.fillStyle = isSelected ? "#0f172a" : "#94a3b8";
+        ctx.fillText(data.deg, n.x, n.y + 12);
+
+        ctx.restore();
+      });
+    }
+
+    function playEPNote(freq, startTime, duration) {
+      if (!audioCtx) audioCtx = new AudioContext();
+
+      const oscSine = audioCtx.createOscillator();
+      oscSine.type = "sine";
+      oscSine.frequency.setValueAtTime(freq, startTime);
+
+      const oscTri = audioCtx.createOscillator();
+      oscTri.type = "triangle";
+      oscTri.frequency.setValueAtTime(freq * 2, startTime);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(Math.min(freq * 5, 2400), startTime);
+      filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.2, 180), startTime + duration);
+
+      const gainSine = audioCtx.createGain();
+      gainSine.gain.setValueAtTime(0.0001, startTime);
+      gainSine.gain.linearRampToValueAtTime(0.07, startTime + 0.015);
+      gainSine.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      const gainTri = audioCtx.createGain();
+      gainTri.gain.setValueAtTime(0.0001, startTime);
+      gainTri.gain.linearRampToValueAtTime(0.025, startTime + 0.01);
+      gainTri.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.5);
+
+      oscSine.connect(gainSine);
+      oscTri.connect(gainTri);
+
+      gainSine.connect(filter);
+      gainTri.connect(filter);
+      filter.connect(audioCtx.destination);
+
+      oscSine.start(startTime);
+      oscTri.start(startTime);
+      oscSine.stop(startTime + duration);
+      oscTri.stop(startTime + duration);
+
+      activeNodes.push(oscSine, oscTri);
+    }
+
+    function playChord(notes, duration = 1.8) {
+      if (!audioCtx) audioCtx = new AudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      const now = audioCtx.currentTime;
+      notes.forEach(freq => {
+        playEPNote(freq, now, duration);
+      });
+    }
+
+    function stopAllAudio() {
+      playbackTimeouts.forEach(id => clearTimeout(id));
+      playbackTimeouts = [];
+
+      activeNodes.forEach(node => {
+        try {
+          if (node.stop) node.stop();
+          if (node.disconnect) node.disconnect();
+        } catch (e) {}
+      });
+      activeNodes = [];
+
+      isPlaying = false;
+      document.getElementById("btn-play").disabled = false;
+      document.getElementById("btn-stop").disabled = true;
+
+      document.querySelectorAll(".prog-item").forEach(el => el.classList.remove("active"));
+    }
+
+    function getChordDisplayName(baseName, tensions) {
+      if (tensions.length === 0) return baseName;
+      return `${baseName}(${tensions.join(",")})`;
+    }
+
+    function toggleTension(tensionLabel) {
+      if (isPlaying) stopAllAudio();
+      if (progression.length === 0) return;
+      
+      const currentProgItem = progression[progression.length - 1];
+      const data = CHORD_DATA[currentProgItem.id];
+
+      const idx = currentProgItem.tensions.indexOf(tensionLabel);
+      if (idx > -1) {
+        currentProgItem.tensions.splice(idx, 1);
+      } else {
+        currentProgItem.tensions.push(tensionLabel);
+      }
+
+      currentProgItem.finalName = getChordDisplayName(data.name, currentProgItem.tensions);
+      currentProgItem.notes = calculateVoicing(data.chordRootMidi, data.upperIntervals, currentProgItem.tensions);
+
+      playChord(currentProgItem.notes, 2.0);
+
+      document.getElementById("info-name").innerText = currentProgItem.finalName;
+      updateTensionTagsUI(data.tensions, currentProgItem.tensions);
+      renderProgression();
+    }
+
+    function updateTensionTagsUI(availableTensions, activeTensions) {
+      const tensionBox = document.getElementById("info-tensions");
+      tensionBox.innerHTML = "";
+      
+      if (!availableTensions || availableTensions.length === 0) {
+        tensionBox.innerHTML = '<span class="tag" style="cursor: default;">노드를 먼저 선택하세요</span>';
+        return;
+      }
+
+      availableTensions.forEach(t => {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        if (activeTensions.includes(t)) {
+          tag.classList.add("active");
+        }
+        tag.innerText = t;
+        tag.onclick = () => toggleTension(t);
+        tensionBox.appendChild(tag);
+      });
+    }
+
+    function updateSidebar(chordId) {
+      if (!chordId) {
+        document.getElementById("info-name").innerText = "-";
+        const roleElem = document.getElementById("info-role");
+        roleElem.style.display = "none";
+        document.getElementById("info-desc").innerText = "원하는 코드를 먼저 클릭하세요.";
+        updateTensionTagsUI([], []);
+        renderProgression();
+        return;
+      }
+
+      const data = CHORD_DATA[chordId];
+      const currentProgItem = progression.length > 0 ? progression[progression.length - 1] : null;
+      
+      document.getElementById("info-name").innerText = currentProgItem ? currentProgItem.finalName : data.name;
+      
+      const roleElem = document.getElementById("info-role");
+      roleElem.style.display = "inline-block";
+      roleElem.innerText = data.role;
+      roleElem.className = "chord-role";
+      if (data.role.includes("Tonic")) roleElem.classList.add("role-tonic");
+      else if (data.role.includes("Subdominant")) roleElem.classList.add("role-subdominant");
+      else if (data.role.includes("Dominant")) roleElem.classList.add("role-dominant");
+      else if (data.role.includes("Secondary")) roleElem.classList.add("role-secondary");
+
+      document.getElementById("info-desc").innerText = data.desc;
+
+      updateTensionTagsUI(data.tensions, currentProgItem ? currentProgItem.tensions : []);
+      renderProgression();
+    }
+
+    // 코드 항목 삭제 함수
+    function removeProgressionItem(index) {
+      if (isPlaying) stopAllAudio();
+      progression.splice(index, 1);
+      
+      if (progression.length > 0) {
+        selectedChordId = progression[progression.length - 1].id;
+      } else {
+        selectedChordId = null;
+      }
+      
+      updateSidebar(selectedChordId);
+      draw();
+    }
+
+    function renderProgression() {
+      const container = document.getElementById("prog-container");
+      container.innerHTML = "";
+
+      if (progression.length === 0) {
+        container.innerHTML = '<span style="font-size: 0.85rem; color: #64748b;">노드를 클릭해 진행을 추가하세요</span>';
+        return;
+      }
+
+      progression.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "prog-item";
+        div.id = `prog-item-${i}`;
+        div.title = "클릭하여 삭제";
+        
+        div.innerHTML = `
+          <span>${item.finalName}</span>
+          <span class="prog-item-del">×</span>
+        `;
+
+        div.onclick = () => removeProgressionItem(i);
+        container.appendChild(div);
+      });
+      container.scrollLeft = container.scrollWidth;
+    }
+
+    function addProgressionItem(chordId) {
+      const data = CHORD_DATA[chordId];
+      progression.push({
+        id: chordId,
+        tensions: [],
+        finalName: data.name,
+        notes: calculateVoicing(data.chordRootMidi, data.upperIntervals, [])
+      });
+    }
+
+    function selectNode(chordId) {
+      if (isPlaying) stopAllAudio();
+      selectedChordId = chordId;
+      
+      addProgressionItem(chordId);
+      
+      const currentProgItem = progression[progression.length - 1];
+      playChord(currentProgItem.notes, 2.0);
+      
+      updateSidebar(chordId);
+      draw();
+    }
+
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      harmonyIds.forEach(id => {
+        const n = nodes[id];
+        const dist = Math.hypot(clickX - n.x, clickY - n.y);
+        if (dist <= n.r) {
+          selectNode(id);
+        }
+      });
+    });
+
+    document.getElementById("key-select").addEventListener("change", (e) => {
+      if (isPlaying) stopAllAudio();
+      currentKeyOffset = parseInt(e.target.value, 10);
+      CHORD_DATA = buildRuntimeChordData();
+
+      progression.forEach(item => {
+        const data = CHORD_DATA[item.id];
+        item.finalName = getChordDisplayName(data.name, item.tensions);
+        item.notes = calculateVoicing(data.chordRootMidi, data.upperIntervals, item.tensions);
+      });
+
+      updateSidebar(selectedChordId);
+      draw();
+    });
+
+    const bpmSlider = document.getElementById("bpm-slider");
+    const bpmText = document.getElementById("bpm-text");
+    bpmSlider.addEventListener("input", (e) => {
+      bpm = parseInt(e.target.value, 10);
+      bpmText.innerText = bpm;
+    });
+
+    document.getElementById("btn-play").addEventListener("click", () => {
+      if (progression.length === 0) return;
+      stopAllAudio();
+
+      isPlaying = true;
+      document.getElementById("btn-play").disabled = true;
+      document.getElementById("btn-stop").disabled = false;
+
+      const stepDurationMs = (60 / bpm) * 2 * 1000;
+      const soundDurationSec = (stepDurationMs / 1000) * 1.2;
+
+      progression.forEach((item, i) => {
+        const timerId = setTimeout(() => {
+          document.querySelectorAll(".prog-item").forEach(el => el.classList.remove("active"));
+          const activeEl = document.getElementById(`prog-item-${i}`);
+          if (activeEl) activeEl.classList.add("active");
+
+          playChord(item.notes, soundDurationSec);
+
+          if (i === progression.length - 1) {
+            const endTimer = setTimeout(() => {
+              stopAllAudio();
+            }, stepDurationMs);
+            playbackTimeouts.push(endTimer);
+          }
+        }, i * stepDurationMs);
+
+        playbackTimeouts.push(timerId);
+      });
+    });
+
+    document.getElementById("btn-stop").addEventListener("click", () => {
+      stopAllAudio();
+    });
+
+    document.getElementById("btn-reset").addEventListener("click", () => {
+      stopAllAudio();
+      progression = [];
+      selectedChordId = null;
+      updateSidebar(null);
+      draw();
+    });
+
+    window.addEventListener("resize", resize);
+
+    // 초기 빈 상태로 렌더링
+    resize();
+    updateSidebar(null);
+  </script>
+</body>
+</html>
