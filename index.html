@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGMB0213RL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CGMB0213RL');
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6397254392843786"
      crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <!-- SEO & Open Graph 메타태그 -->
-<meta name="description" content="ChordHelper - DMK Studio에서 개발한 직관적인 원형 노드 기반 코드 진행 및 텐션 보이싱 빌더 웹앱." />
-<link rel="canonical" href="https://chordhelper.createdmk.com/" />
+  <meta name="description" content="ChordHelper - DMK Studio에서 개발한 직관적인 원형 노드 기반 코드 진행 및 텐션 보이싱 빌더 웹앱." />
+  <link rel="canonical" href="https://chordhelper.createdmk.com/" />
 
-<!-- Open Graph (카카오톡, 디스코드, 페이스북 공유 미리보기) -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="ChordHelper - DMK Studio" />
-<meta property="og:description" content="노드 기반 코드 진행 및 화성학 텐션 빌더" />
-<meta property="og:url" content="https://chordhelper.createdmk.com/" />
-<meta name="google-adsense-account" content="ca-pub-6397254392843786">
+  <!-- Open Graph (카카오톡, 디스코드, 페이스북 공유 미리보기) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ChordHelper - DMK Studio" />
+  <meta property="og:description" content="노드 기반 코드 진행 및 화성학 텐션 빌더" />
+  <meta property="og:url" content="https://chordhelper.createdmk.com/" />
+  <meta name="google-adsense-account" content="ca-pub-6397254392843786">
   <title>ChordHelper - DMK Studio</title>
   <style>
     * {
@@ -22,6 +31,7 @@
       margin: 0;
       padding: 0;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -31,9 +41,10 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
+      height: 100dvh;
     }
     header {
-      padding: 10px 20px;
+      padding: 10px 16px;
       background: #1e293b;
       display: flex;
       align-items: center;
@@ -41,15 +52,15 @@
       border-bottom: 1px solid #334155;
       z-index: 10;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     .title {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #38bdf8;
@@ -58,19 +69,19 @@
       gap: 6px;
     }
     .studio-badge {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
       color: #0f172a;
-      padding: 3px 8px;
+      padding: 2px 6px;
       border-radius: 4px;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
     }
     .controls {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -79,10 +90,10 @@
       align-items: center;
       gap: 6px;
       background: #0f172a;
-      padding: 4px 10px;
+      padding: 4px 8px;
       border-radius: 6px;
       border: 1px solid #334155;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #cbd5e1;
     }
     select {
@@ -90,13 +101,14 @@
       color: #38bdf8;
       border: 1px solid #475569;
       border-radius: 4px;
-      padding: 2px 6px;
+      padding: 2px 4px;
       font-weight: bold;
       cursor: pointer;
       outline: none;
+      font-size: 0.8rem;
     }
     .ctrl-box input[type="range"] {
-      width: 80px;
+      width: 70px;
       accent-color: #38bdf8;
       cursor: pointer;
     }
@@ -110,12 +122,13 @@
       background: #38bdf8;
       color: #0f172a;
       border: none;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 6px;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: all 0.2s;
+      white-space: nowrap;
     }
     button:hover {
       background: #7dd3fc;
@@ -142,48 +155,52 @@
       display: flex;
       flex: 1;
       position: relative;
+      overflow: hidden;
     }
     #canvas-container {
       flex: 1;
       position: relative;
+      min-width: 0;
     }
     canvas {
       display: block;
       width: 100%;
       height: 100%;
       background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+      touch-action: none;
     }
     #sidebar {
       width: 320px;
       background: #1e293b;
       border-left: 1px solid #334155;
-      padding: 20px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       box-shadow: -4px 0 16px rgba(0,0,0,0.3);
       justify-content: space-between;
+      overflow-y: auto;
     }
     .sidebar-content {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
     .panel-section {
       background: #0f172a;
-      padding: 14px;
+      padding: 12px;
       border-radius: 8px;
       border: 1px solid #334155;
     }
     .panel-section h3 {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       color: #94a3b8;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       letter-spacing: 0.05em;
     }
     .chord-name {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: #38bdf8;
       display: flex;
@@ -192,8 +209,8 @@
       flex-wrap: wrap;
     }
     .chord-role {
-      font-size: 0.8rem;
-      padding: 2px 8px;
+      font-size: 0.75rem;
+      padding: 2px 6px;
       border-radius: 4px;
       font-weight: 600;
     }
@@ -229,21 +246,21 @@
     }
     .progression-list {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 6px;
-      min-height: 44px;
+      padding-bottom: 4px;
+      min-height: 38px;
       align-items: center;
     }
     .prog-item {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 10px;
+      padding: 5px 8px;
       background: #334155;
       border-radius: 6px;
       font-weight: bold;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       white-space: nowrap;
       transition: all 0.2s;
       cursor: pointer;
@@ -256,15 +273,15 @@
     .prog-item.active {
       background: #38bdf8;
       color: #0f172a;
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
     .prog-item-del {
       font-size: 0.8rem;
       line-height: 1;
       color: #94a3b8;
       border-radius: 50%;
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -274,24 +291,73 @@
       color: #ef4444;
       background: rgba(239, 68, 68, 0.15);
     }
-    .hint {
-      font-size: 0.8rem;
-      color: #64748b;
-      line-height: 1.4;
-    }
     .footer-brand {
       border-top: 1px solid #334155;
-      padding-top: 12px;
+      padding-top: 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: #64748b;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       letter-spacing: 0.05em;
     }
     .footer-brand b {
       color: #94a3b8;
       letter-spacing: 0.1em;
+    }
+
+    /* ===== 세로형 모바일 반응형 미디어 쿼리 ===== */
+    @media (max-width: 768px) {
+      header {
+        padding: 8px 12px;
+        gap: 6px;
+      }
+      .brand-group {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .title {
+        font-size: 1.05rem;
+      }
+      .controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .ctrl-box {
+        padding: 3px 6px;
+        font-size: 0.72rem;
+      }
+      .ctrl-box input[type="range"] {
+        width: 50px;
+      }
+      button {
+        padding: 5px 8px;
+        font-size: 0.72rem;
+      }
+      #main-container {
+        flex-direction: column;
+      }
+      #canvas-container {
+        flex: 1.1;
+        min-height: 250px;
+      }
+      #sidebar {
+        width: 100%;
+        flex: 1;
+        border-left: none;
+        border-top: 1px solid #334155;
+        padding: 10px 12px;
+        box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
+      }
+      .sidebar-content {
+        gap: 8px;
+      }
+      .panel-section {
+        padding: 8px 10px;
+      }
+      .chord-name {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -326,8 +392,8 @@
         <input type="range" id="bpm-slider" min="40" max="200" value="90" />
         <span class="bpm-val" id="bpm-text">90</span>
       </div>
-      <button class="secondary" id="btn-reset">진행 초기화</button>
-      <button id="btn-play">진행 재생 🎵</button>
+      <button class="secondary" id="btn-reset">초기화</button>
+      <button id="btn-play">재생 🎵</button>
       <button class="stop-btn" id="btn-stop" disabled>정지 ⏹</button>
     </div>
   </header>
@@ -345,7 +411,7 @@
             <span id="info-name">-</span>
             <span id="info-role" class="chord-role" style="display: none;">-</span>
           </div>
-          <p id="info-desc" style="font-size: 0.85rem; color: #cbd5e1; margin-top: 6px;">원하는 코드를 먼저 클릭하세요.</p>
+          <p id="info-desc" style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">원하는 코드를 먼저 클릭하세요.</p>
         </div>
 
         <div class="panel-section">
@@ -567,8 +633,8 @@
     }
 
     let CHORD_DATA = buildRuntimeChordData();
-    let selectedChordId = null; // 초기 강제 선택 없음
-    let progression = [];       // 빈 배열로 시작
+    let selectedChordId = null;
+    let progression = [];
     let bpm = 90;
 
     const canvas = document.getElementById("graph");
@@ -584,23 +650,40 @@
     let isPlaying = false;
 
     function resize() {
-      width = canvas.width = canvas.parentElement.clientWidth;
-      height = canvas.height = canvas.parentElement.clientHeight;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      width = rect.width;
+      height = rect.height;
+
+      // 캔버스 레티나 해상도 스케일링
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
       calculatePositions();
       draw();
     }
 
     function calculatePositions() {
+      const minDim = Math.min(width, height);
       const centerX = width / 2;
       const centerY = height / 2;
-      const radius = Math.min(width, height) * 0.36;
+
+      // 모바일/데스크톱 화면 크기에 따라 원형 궤도 및 노드 크기 반응형 조절
+      const radius = minDim * (width < 500 ? 0.38 : 0.36);
+      const dynamicNodeRadius = Math.max(18, Math.min(36, minDim * 0.08));
 
       harmonyIds.forEach((id, idx) => {
         const angle = (idx / harmonyIds.length) * Math.PI * 2 - Math.PI / 2;
         nodes[id] = {
           x: centerX + Math.cos(angle) * radius,
           y: centerY + Math.sin(angle) * radius,
-          r: 36,
+          r: dynamicNodeRadius,
           id: id
         };
       });
@@ -617,9 +700,12 @@
     }
 
     function drawArrow(x1, y1, x2, y2, label, isHighlight) {
-      const headlen = 10;
+      const isSmall = width < 500;
+      const headlen = isSmall ? 7 : 10;
       const angle = Math.atan2(y2 - y1, x2 - x1);
-      const offset = 38;
+      const nodeRadius = nodes[harmonyIds[0]] ? nodes[harmonyIds[0]].r : 30;
+      const offset = nodeRadius + 3;
+
       const startX = x1 + Math.cos(angle) * offset;
       const startY = y1 + Math.sin(angle) * offset;
       const endX = x2 - Math.cos(angle) * offset;
@@ -627,8 +713,8 @@
 
       ctx.save();
       ctx.strokeStyle = isHighlight ? "#38bdf8" : "rgba(100, 116, 139, 0.25)";
-      ctx.lineWidth = isHighlight ? 2.5 : 1;
-      ctx.setLineDash(isHighlight ? [] : [4, 4]);
+      ctx.lineWidth = isHighlight ? (isSmall ? 2 : 2.5) : 1;
+      ctx.setLineDash(isHighlight ? [] : [3, 3]);
 
       ctx.beginPath();
       ctx.moveTo(startX, startY);
@@ -646,14 +732,15 @@
 
         const midX = (startX + endX) / 2;
         const midY = (startY + endY) / 2;
-        ctx.font = "11px sans-serif";
+        const fontSize = isSmall ? 9 : 11;
+        ctx.font = `${fontSize}px sans-serif`;
         const textWidth = ctx.measureText(label).width;
 
         ctx.fillStyle = "#0f172a";
-        ctx.fillRect(midX - textWidth / 2 - 4, midY - 9, textWidth + 8, 18);
+        ctx.fillRect(midX - textWidth / 2 - 3, midY - (fontSize * 0.8), textWidth + 6, fontSize * 1.6);
         ctx.strokeStyle = "#38bdf8";
         ctx.lineWidth = 1;
-        ctx.strokeRect(midX - textWidth / 2 - 4, midY - 9, textWidth + 8, 18);
+        ctx.strokeRect(midX - textWidth / 2 - 3, midY - (fontSize * 0.8), textWidth + 6, fontSize * 1.6);
 
         ctx.fillStyle = "#f8fafc";
         ctx.textAlign = "center";
@@ -685,6 +772,10 @@
         });
       }
 
+      const isSmall = width < 500;
+      const nameFontSize = isSmall ? 10 : 13;
+      const degFontSize = isSmall ? 8 : 10;
+
       harmonyIds.forEach(id => {
         const n = nodes[id];
         const data = CHORD_DATA[id];
@@ -698,18 +789,18 @@
         ctx.fillStyle = isSelected ? "#38bdf8" : (isTarget ? "#1e293b" : "#0f172a");
         ctx.fill();
 
-        ctx.lineWidth = isSelected ? 4 : (isTarget ? 2 : 1.5);
+        ctx.lineWidth = isSelected ? (isSmall ? 3 : 4) : (isTarget ? 2 : 1.5);
         ctx.strokeStyle = isSelected ? "#ffffff" : getRoleColor(data.role);
         ctx.stroke();
 
         ctx.textAlign = "center";
         ctx.fillStyle = isSelected ? "#0f172a" : "#f8fafc";
-        ctx.font = "bold 13px sans-serif";
-        ctx.fillText(data.name, n.x, n.y - 4);
+        ctx.font = `bold ${nameFontSize}px sans-serif`;
+        ctx.fillText(data.name, n.x, n.y - (isSmall ? 2 : 4));
 
-        ctx.font = "10px sans-serif";
+        ctx.font = `${degFontSize}px sans-serif`;
         ctx.fillStyle = isSelected ? "#0f172a" : "#94a3b8";
-        ctx.fillText(data.deg, n.x, n.y + 12);
+        ctx.fillText(data.deg, n.x, n.y + (isSmall ? 9 : 12));
 
         ctx.restore();
       });
@@ -866,7 +957,6 @@
       renderProgression();
     }
 
-    // 코드 항목 삭제 함수
     function removeProgressionItem(index) {
       if (isPlaying) stopAllAudio();
       progression.splice(index, 1);
@@ -886,7 +976,7 @@
       container.innerHTML = "";
 
       if (progression.length === 0) {
-        container.innerHTML = '<span style="font-size: 0.85rem; color: #64748b;">노드를 클릭해 진행을 추가하세요</span>';
+        container.innerHTML = '<span style="font-size: 0.8rem; color: #64748b;">노드를 클릭해 진행을 추가하세요</span>';
         return;
       }
 
@@ -930,18 +1020,23 @@
       draw();
     }
 
-    canvas.addEventListener("click", (e) => {
+    // 클릭 및 터치 이벤트 통합 처리
+    function handlePointerClick(clientX, clientY) {
       const rect = canvas.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
+      const clickX = clientX - rect.left;
+      const clickY = clientY - rect.top;
 
       harmonyIds.forEach(id => {
         const n = nodes[id];
         const dist = Math.hypot(clickX - n.x, clickY - n.y);
-        if (dist <= n.r) {
+        if (dist <= n.r * 1.15) { // 터치 편의성을 위해 클릭 판정 범위 살짝 확장
           selectNode(id);
         }
       });
+    }
+
+    canvas.addEventListener("click", (e) => {
+      handlePointerClick(e.clientX, e.clientY);
     });
 
     document.getElementById("key-select").addEventListener("change", (e) => {
@@ -1010,8 +1105,9 @@
     });
 
     window.addEventListener("resize", resize);
+    window.addEventListener("orientationchange", () => setTimeout(resize, 100));
 
-    // 초기 빈 상태로 렌더링
+    // 초기 실행
     resize();
     updateSidebar(null);
   </script>
