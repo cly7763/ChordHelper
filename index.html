@@ -10,21 +10,10 @@
 
     gtag('config', 'G-CGMB0213RL');
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6397254392843786"
-     crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <!-- SEO & Open Graph 메타태그 -->
-  <meta name="description" content="ChordHelper - DMK Studio에서 개발한 직관적인 원형 노드 기반 코드 진행 및 텐션 보이싱 빌더 웹앱." />
-  <link rel="canonical" href="https://chordhelper.createdmk.com/" />
-
-  <!-- Open Graph (카카오톡, 디스코드, 페이스북 공유 미리보기) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="ChordHelper - DMK Studio" />
-  <meta property="og:description" content="노드 기반 코드 진행 및 화성학 텐션 빌더" />
-  <meta property="og:url" content="https://chordhelper.createdmk.com/" />
-  <meta name="google-adsense-account" content="ca-pub-6397254392843786">
-  <title>ChordHelper - DMK Studio</title>
+  <title>ChordHelper Pro - 화성학 & 대리코드 빌더</title>
+  <meta name="description" content="SubV7, 세컨더리 도미넌트, SDM 모달 인터체인지를 직관적으로 연결하는 인터랙티브 코드 진행 빌더." />
   <style>
     * {
       box-sizing: border-box;
@@ -35,7 +24,7 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0f172a;
+      background: #080c14;
       color: #f8fafc;
       overflow: hidden;
       display: flex;
@@ -44,56 +33,50 @@
       height: 100dvh;
     }
     header {
-      padding: 10px 16px;
-      background: #1e293b;
+      padding: 8px 16px;
+      background: #0f172a;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #334155;
+      border-bottom: 1px solid #1e293b;
       z-index: 10;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .title {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #38bdf8;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
-    .studio-badge {
+    .badge-pro {
       font-size: 0.65rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #0f172a;
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+      color: #fff;
       padding: 2px 6px;
       border-radius: 4px;
-      box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
     }
     .controls {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
       flex-wrap: wrap;
     }
     .ctrl-box {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: #0f172a;
+      gap: 5px;
+      background: #030712;
       padding: 4px 8px;
       border-radius: 6px;
       border: 1px solid #334155;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #cbd5e1;
     }
     select {
@@ -105,52 +88,64 @@
       font-weight: bold;
       cursor: pointer;
       outline: none;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
     }
     .ctrl-box input[type="range"] {
-      width: 70px;
+      width: 55px;
       accent-color: #38bdf8;
       cursor: pointer;
     }
     .bpm-val {
       font-weight: 700;
       color: #38bdf8;
-      width: 24px;
+      width: 22px;
       text-align: right;
     }
     button {
       background: #38bdf8;
-      color: #0f172a;
+      color: #030712;
       border: none;
-      padding: 6px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.8rem;
+      font-weight: 700;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: all 0.2s;
       white-space: nowrap;
     }
-    button:hover {
-      background: #7dd3fc;
+    button:hover { background: #7dd3fc; }
+    button.secondary { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+    button.secondary:hover { background: #334155; color: #fff; }
+    button.stop-btn { background: #ef4444; color: #fff; }
+    button.stop-btn:hover { background: #f87171; }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* 언어 선택 스위처 스타일 */
+    .lang-switcher {
+      display: flex;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 2px;
+      gap: 2px;
+      margin-left: 10px;
     }
-    button.secondary {
-      background: #334155;
-      color: #f8fafc;
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 16px;
+      transition: all 0.2s ease;
     }
-    button.secondary:hover {
-      background: #475569;
+    .lang-btn.active {
+      background: #38bdf8;
+      color: #0f172a;
     }
-    button.stop-btn {
-      background: #ef4444;
-      color: #ffffff;
-    }
-    button.stop-btn:hover {
-      background: #f87171;
-    }
-    button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+
     #main-container {
       display: flex;
       flex: 1;
@@ -166,197 +161,198 @@
       display: block;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
       touch-action: none;
     }
     #sidebar {
-      width: 320px;
-      background: #1e293b;
-      border-left: 1px solid #334155;
-      padding: 16px;
+      width: 350px;
+      background: #0f172a;
+      border-left: 1px solid #1e293b;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      box-shadow: -4px 0 16px rgba(0,0,0,0.3);
+      gap: 10px;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.5);
       justify-content: space-between;
       overflow-y: auto;
     }
     .sidebar-content {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .panel-section {
-      background: #0f172a;
-      padding: 12px;
+      background: #080c14;
+      padding: 10px 12px;
       border-radius: 8px;
-      border: 1px solid #334155;
+      border: 1px solid #1e293b;
     }
     .panel-section h3 {
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       color: #94a3b8;
       margin-bottom: 6px;
       letter-spacing: 0.05em;
     }
+    .chord-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
     .chord-name {
       font-size: 1.4rem;
       font-weight: 800;
       color: #38bdf8;
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      flex-wrap: wrap;
     }
     .chord-role {
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       padding: 2px 6px;
       border-radius: 4px;
-      font-weight: 600;
+      font-weight: 700;
     }
-    .role-tonic { background: #065f46; color: #34d399; }
-    .role-subdominant { background: #1e40af; color: #60a5fa; }
-    .role-dominant { background: #991b1b; color: #f87171; }
-    .role-secondary { background: #854d0e; color: #facc15; }
+    .role-tonic { background: #064e3b; color: #34d399; }
+    .role-subdominant { background: #1e3a8a; color: #60a5fa; }
+    .role-dominant { background: #7f1d1d; color: #f87171; }
+    .role-secondary { background: #78350f; color: #facc15; }
+    .role-subv { background: #581c87; color: #c084fc; }
+    .role-sdm { background: #831843; color: #f472b6; }
 
     .tag-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
     }
     .tag {
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      background: #334155;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      background: #1e293b;
       border-radius: 4px;
       color: #cbd5e1;
       cursor: pointer;
       transition: all 0.2s;
-      border: 1px solid transparent;
+      border: 1px solid #334155;
     }
     .tag:hover {
-      background: #475569;
+      background: #334155;
       color: #f8fafc;
+      border-color: #38bdf8;
     }
     .tag.active {
       background: #0ea5e9;
-      color: #0f172a;
+      color: #030712;
       font-weight: bold;
       border-color: #38bdf8;
     }
+
+    /* 다음 추천 연결 카드 */
+    .recom-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+    .recom-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111827;
+      border: 1px solid #1e293b;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.75rem;
+    }
+    .recom-item:hover {
+      border-color: #38bdf8;
+      background: #1e293b;
+      transform: translateX(3px);
+    }
+    .recom-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .recom-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .badge-diatonic { background: #1e3a8a; color: #93c5fd; }
+    .badge-dominant { background: #7f1d1d; color: #fca5a5; }
+    .badge-secondary { background: #78350f; color: #fde047; }
+    .badge-subv { background: #581c87; color: #d8b4fe; }
+    .badge-sdm { background: #831843; color: #f9a8d4; }
+
     .progression-list {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      padding: 2px 0;
       min-height: 38px;
       align-items: center;
     }
     .prog-item {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 8px;
-      background: #334155;
-      border-radius: 6px;
+      gap: 5px;
+      padding: 5px 9px;
+      background: #1e293b;
+      border-radius: 5px;
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       white-space: nowrap;
-      transition: all 0.2s;
       cursor: pointer;
-      border: 1px solid transparent;
+      border: 1px solid #334155;
     }
-    .prog-item:hover {
-      background: #475569;
-      border-color: #ef4444;
-    }
+    .prog-item:hover { border-color: #ef4444; }
     .prog-item.active {
       background: #38bdf8;
-      color: #0f172a;
-      transform: scale(1.03);
+      color: #030712;
+      border-color: #7dd3fc;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
     }
     .prog-item-del {
       font-size: 0.8rem;
-      line-height: 1;
       color: #94a3b8;
-      border-radius: 50%;
-      width: 14px;
-      height: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s;
-    }
-    .prog-item:hover .prog-item-del {
-      color: #ef4444;
-      background: rgba(239, 68, 68, 0.15);
     }
     .footer-brand {
-      border-top: 1px solid #334155;
-      padding-top: 8px;
+      border-top: 1px solid #1e293b;
+      padding-top: 6px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: #64748b;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-    }
-    .footer-brand b {
-      color: #94a3b8;
-      letter-spacing: 0.1em;
+      font-size: 0.68rem;
     }
 
-    /* ===== 세로형 모바일 반응형 미디어 쿼리 ===== */
+    /* 모바일 반응형 */
     @media (max-width: 768px) {
-      header {
-        padding: 8px 12px;
-        gap: 6px;
-      }
-      .brand-group {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .title {
-        font-size: 1.05rem;
-      }
-      .controls {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .ctrl-box {
-        padding: 3px 6px;
-        font-size: 0.72rem;
-      }
-      .ctrl-box input[type="range"] {
-        width: 50px;
-      }
-      button {
-        padding: 5px 8px;
-        font-size: 0.72rem;
-      }
       #main-container {
         flex-direction: column;
       }
       #canvas-container {
-        flex: 1.1;
-        min-height: 250px;
+        flex: 1.3;
+        min-height: 290px;
       }
       #sidebar {
         width: 100%;
         flex: 1;
         border-left: none;
-        border-top: 1px solid #334155;
-        padding: 10px 12px;
-        box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
-      }
-      .sidebar-content {
-        gap: 8px;
+        border-top: 1px solid #1e293b;
+        padding: 10px;
       }
       .panel-section {
-        padding: 8px 10px;
+        padding: 6px 8px;
       }
       .chord-name {
         font-size: 1.2rem;
+      }
+      .recom-list {
+        max-height: 90px;
       }
     }
   </style>
@@ -366,25 +362,25 @@
   <header>
     <div class="brand-group">
       <div class="title">ChordHelper</div>
-      <span class="studio-badge">DMK STUDIO</span>
+      <span class="badge-pro">PRO</span>
     </div>
 
     <div class="controls">
       <div class="ctrl-box">
-        <span>Key</span>
+        <span data-i18n="lbl-key">Key</span>
         <select id="key-select">
-          <option value="0">C</option>
-          <option value="1">Db</option>
-          <option value="2">D</option>
-          <option value="3">Eb</option>
-          <option value="4">E</option>
-          <option value="5">F</option>
-          <option value="6">F#</option>
-          <option value="7">G</option>
-          <option value="8">Ab</option>
-          <option value="9">A</option>
-          <option value="10">Bb</option>
-          <option value="11">B</option>
+          <option value="0">C Major</option>
+          <option value="1">Db Major</option>
+          <option value="2">D Major</option>
+          <option value="3">Eb Major</option>
+          <option value="4">E Major</option>
+          <option value="5">F Major</option>
+          <option value="6">F# Major</option>
+          <option value="7">G Major</option>
+          <option value="8">Ab Major</option>
+          <option value="9">A Major</option>
+          <option value="10">Bb Major</option>
+          <option value="11">B Major</option>
         </select>
       </div>
       <div class="ctrl-box">
@@ -392,9 +388,14 @@
         <input type="range" id="bpm-slider" min="40" max="200" value="90" />
         <span class="bpm-val" id="bpm-text">90</span>
       </div>
-      <button class="secondary" id="btn-reset">초기화</button>
-      <button id="btn-play">재생 🎵</button>
-      <button class="stop-btn" id="btn-stop" disabled>정지 ⏹</button>
+      <button class="secondary" id="btn-reset" data-i18n="btn-reset">초기화</button>
+      <button id="btn-play" data-i18n="btn-play">재생 ▶</button>
+      <button class="stop-btn" id="btn-stop" disabled data-i18n="btn-stop">정지 ⏹</button>
+      <!-- 언어 전환 버튼 추가 -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('ko')" id="btn-ko">KOR</button>
+        <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">ENG</button>
+      </div>
     </div>
   </header>
 
@@ -405,179 +406,316 @@
 
     <div id="sidebar">
       <div class="sidebar-content">
+        <!-- 현재 화음 분석 -->
         <div class="panel-section">
-          <h3>선택된 코드 정보</h3>
-          <div class="chord-name">
-            <span id="info-name">-</span>
+          <h3 data-i18n="panel-analysis">선택 화음 분석</h3>
+          <div class="chord-name-wrap">
+            <span class="chord-name" id="info-name">-</span>
             <span id="info-role" class="chord-role" style="display: none;">-</span>
           </div>
-          <p id="info-desc" style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">원하는 코드를 먼저 클릭하세요.</p>
+          <p id="info-desc" style="font-size: 0.74rem; color: #94a3b8; margin-top: 4px; line-height: 1.35;" data-i18n="desc-default">노드를 터치하면 대리코드 및 진행 방향이 분석됩니다.</p>
         </div>
 
+        <!-- 다음 추천 연결 (사이드바 카드 형태) -->
         <div class="panel-section">
-          <h3>추천 텐션 (클릭하여 추가)</h3>
-          <div class="tag-container" id="info-tensions">
-            <span class="tag" style="cursor: default;">노드를 먼저 선택하세요</span>
+          <h3 data-i18n="panel-recom">다음 추천 연결 (화성학 분기)</h3>
+          <div class="recom-list" id="info-recom">
+            <span style="font-size: 0.72rem; color: #64748b;" data-i18n="recom-default">코드를 선택하면 다음 추천 진행이 표시됩니다.</span>
           </div>
         </div>
 
+        <!-- 추천 텐션 -->
         <div class="panel-section">
-          <h3>빌드된 코드 진행</h3>
-          <div class="progression-list" id="prog-container"></div>
+          <h3 data-i18n="panel-tension">추천 텐션 (Tensions)</h3>
+          <div class="tag-container" id="info-tensions">
+            <span class="tag" style="cursor: default;" data-i18n="tension-default">코드 미선택</span>
+          </div>
         </div>
 
+        <!-- 진행 시퀀스 -->
+        <div class="panel-section">
+          <h3 data-i18n="panel-sequence">진행 시퀀스</h3>
+          <div class="progression-list" id="prog-container"></div>
+        </div>
       </div>
 
       <div class="footer-brand">
-        <span>Powered by <b>DMK STUDIO</b></span>
-        <span>v1.0.0</span>
+        <span>DMK STUDIO HARMONY</span>
+        <span>Clean Flow Architecture</span>
       </div>
     </div>
   </div>
 
   <script>
+    // --- 다국어 데이터 ---
+    const TRANSLATIONS = {
+      ko: {
+        "lbl-key": "Key",
+        "btn-reset": "초기화",
+        "btn-play": "재생 ▶",
+        "btn-stop": "정지 ⏹",
+        "panel-analysis": "선택 화음 분석",
+        "desc-default": "노드를 터치하면 대리코드 및 진행 방향이 분석됩니다.",
+        "panel-recom": "다음 추천 연결 (화성학 분기)",
+        "recom-default": "코드를 선택하면 다음 추천 진행이 표시됩니다.",
+        "panel-tension": "추천 텐션 (Tensions)",
+        "tension-default": "코드 미선택",
+        "panel-sequence": "진행 시퀀스",
+        "prog-default": "노드를 클릭해 진행을 추가하세요",
+        // 화성학 데이터 다국어 지원 (초기화시 적용)
+        "roles": {
+            "Tonic": "Tonic",
+            "Subdominant": "Subdominant",
+            "Dominant": "Dominant",
+            "Tonic Sub": "Tonic Sub",
+            "Substitute Dominant": "Substitute Dominant",
+            "Secondary Dominant": "Secondary Dominant",
+            "SDM Substitution": "SDM Substitution"
+        },
+        "descs": {
+            "Imaj7": "기본 으뜸화음(토닉). 모든 긴장이 안정적으로 귀결되는 목적지입니다.",
+            "iim7": "2도 서브도미넌트 화음. ii-V 진행의 핵심 시작점입니다.",
+            "iiim7": "토닉 1차 대리코드. vi로 이어지는 징검다리 역할을 합니다.",
+            "IVmaj7": "밝고 열린 발전감을 주는 서브도미넌트 화음입니다.",
+            "V7": "Imaj7으로 강하게 해결되려는 트라이톤 긴장 화음입니다.",
+            "vim7": "평행단조 으뜸화음이자 토닉 대리코드입니다.",
+            "SubV7": "V7의 증4도 대리 화음 (bII7). Imaj7으로 반음 아래로 매끄럽게 슬라이드 해결됩니다.",
+            "SubV7_ii": "iim7으로 반음 하강하여 떨어지는 세련된 재즈 대리 화음입니다 (bIII7).",
+            "V7_ii": "iim7을 향해 강력한 추진력을 만드는 세컨더리 도미넌트입니다 (VI7).",
+            "V7_vi": "vim7(나란한단조)을 목표로 하는 도미넌트 화음입니다 (III7).",
+            "ivm7": "동주음단조에서 차용한 서브도미넌트 마이너 코드로 감성적인 여운을 줍니다.",
+            "bVII7": "백도어 도미넌트(Backdoor 7th)로, V7 대신 I로 상향 진입하는 대리코드입니다."
+        },
+        "labels": {
+            "Imaj7_iim7": "ii-V-I 출발",
+            "Imaj7_IVmaj7": "서브도미넌트 발전",
+            "Imaj7_V7_ii": "세컨더리 도미넌트 (V7/ii)",
+            "Imaj7_SubV7_ii": "대리 도미넌트 (SubV/ii)",
+            "Imaj7_ivm7": "SDM 모달 인터체인지",
+            "iim7_V7": "정격 도미넌트 (V7)",
+            "iim7_SubV7": "반음 하강 대리도미넌트 (SubV7)",
+            "iim7_bVII7": "SDM 대리 (bVII7)",
+            "iiim7_vim7": "5도 하강 vi 진행",
+            "iiim7_V7_vi": "세컨더리 도미넌트 (V7/vi)",
+            "iiim7_IVmaj7": "IVmaj7 발전",
+            "IVmaj7_ivm7": "마이너 클리셰 (ivm7)",
+            "IVmaj7_V7": "정격 도미넌트 (V7)",
+            "IVmaj7_SubV7": "대리 도미넌트 (SubV7)",
+            "IVmaj7_iiim7": "하향 토닉 대리 (iii)",
+            "V7_Imaj7": "토닉 완전 해결 (Authentic)",
+            "V7_vim7": "거짓마침 (Deceptive)",
+            "vim7_iim7": "ii 진행",
+            "vim7_V7_ii": "세컨더리 도미넌트 (V7/ii)",
+            "vim7_SubV7_ii": "대리 도미넌트 (SubV/ii)",
+            "vim7_IVmaj7": "서브도미넌트 (IV)",
+            "SubV7_Imaj7": "반음 하향 해결 (bII7 -> I)",
+            "SubV7_ii_iim7": "목표 반음 하강 (-> ii)",
+            "V7_ii_iim7": "목표 해결 (-> ii)",
+            "V7_vi_vim7": "목표 해결 (-> vi)",
+            "ivm7_Imaj7": "아련한 토닉 종지 (iv -> I)",
+            "ivm7_bVII7": "Backdoor 진행",
+            "bVII7_Imaj7": "Backdoor 해결 (-> Imaj7)"
+        }
+      },
+      en: {
+        "lbl-key": "Key",
+        "btn-reset": "Reset",
+        "btn-play": "Play ▶",
+        "btn-stop": "Stop ⏹",
+        "panel-analysis": "Chord Analysis",
+        "desc-default": "Tap a node to see substitution options and harmonic flow.",
+        "panel-recom": "Recommended Flow",
+        "recom-default": "Select a chord to view recommended next progressions.",
+        "panel-tension": "Available Tensions",
+        "tension-default": "No chord selected",
+        "panel-sequence": "Progression Sequence",
+        "prog-default": "Click nodes to build a progression",
+        // 화성학 데이터 다국어 지원
+        "roles": {
+            "Tonic": "Tonic",
+            "Subdominant": "Subdominant",
+            "Dominant": "Dominant",
+            "Tonic Sub": "Tonic Sub",
+            "Substitute Dominant": "Substitute Dominant",
+            "Secondary Dominant": "Secondary Dominant",
+            "SDM Substitution": "SDM Substitution"
+        },
+        "descs": {
+            "Imaj7": "Primary Tonic. The home chord where all tension safely resolves.",
+            "iim7": "Supertonic. The core starting point of the ii-V-I progression.",
+            "iiim7": "Tonic Substitute. Often acts as a stepping stone to the vi chord.",
+            "IVmaj7": "Subdominant. Provides a bright and open sense of development.",
+            "V7": "Dominant. Contains tritone tension that strongly resolves to Imaj7.",
+            "vim7": "Submediant. The relative minor tonic and a primary tonic substitute.",
+            "SubV7": "Tritone Substitution (bII7). Smoothly resolves downward by a half-step to Imaj7.",
+            "SubV7_ii": "Tritone Substitution targeting iim7 (bIII7). Creates a sophisticated descending jazz progression.",
+            "V7_ii": "Secondary Dominant (VI7). Creates strong harmonic propulsion towards iim7.",
+            "V7_vi": "Secondary Dominant (III7). Targets the relative minor (vim7).",
+            "ivm7": "Subdominant Minor (SDM) borrowed from the parallel minor. Adds emotional depth.",
+            "bVII7": "Backdoor Dominant. An SDM substitute that ascends into the Tonic instead of V7."
+        },
+        "labels": {
+            "Imaj7_iim7": "Start ii-V-I",
+            "Imaj7_IVmaj7": "To Subdominant",
+            "Imaj7_V7_ii": "Secondary Dominant (V7/ii)",
+            "Imaj7_SubV7_ii": "Substitute Dominant (SubV/ii)",
+            "Imaj7_ivm7": "Modal Interchange (SDM)",
+            "iim7_V7": "Authentic Dominant (V7)",
+            "iim7_SubV7": "Descending Substitution (SubV7)",
+            "iim7_bVII7": "SDM Substitution (bVII7)",
+            "iiim7_vim7": "Descend 5th to vi",
+            "iiim7_V7_vi": "Secondary Dominant (V7/vi)",
+            "iiim7_IVmaj7": "Develop to IVmaj7",
+            "IVmaj7_ivm7": "Minor Cliche (ivm7)",
+            "IVmaj7_V7": "Authentic Dominant (V7)",
+            "IVmaj7_SubV7": "Substitute Dominant (SubV7)",
+            "IVmaj7_iiim7": "Descending Tonic Sub (iii)",
+            "V7_Imaj7": "Authentic Resolution (I)",
+            "V7_vim7": "Deceptive Cadence (vi)",
+            "vim7_iim7": "Proceed to ii",
+            "vim7_V7_ii": "Secondary Dominant (V7/ii)",
+            "vim7_SubV7_ii": "Substitute Dominant (SubV/ii)",
+            "vim7_IVmaj7": "To Subdominant (IV)",
+            "SubV7_Imaj7": "Half-step Resolution (bII7 -> I)",
+            "SubV7_ii_iim7": "Half-step Resolution (-> ii)",
+            "V7_ii_iim7": "Resolve to Target (-> ii)",
+            "V7_vi_vim7": "Resolve to Target (-> vi)",
+            "ivm7_Imaj7": "Plagal Resolution (iv -> I)",
+            "ivm7_bVII7": "Backdoor Progression",
+            "bVII7_Imaj7": "Backdoor Resolution (-> Imaj7)"
+        }
+      }
+    };
+
+    let currentLang = 'ko';
+
     const NOTE_NAMES = ["C", "Db", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
     let currentKeyOffset = 0;
 
     const TENSION_SEMITONES = {
-      "9": 14,
-      "b9": 13,
-      "#9": 15,
-      "11": 17,
-      "#11": 18,
-      "13": 21,
-      "b13": 20
+      "9": 14, "b9": 13, "#9": 15, "11": 17, "#11": 18, "13": 21, "b13": 20
     };
 
-    const BASE_HARMONY = {
-      "Imaj7": {
-        id: "Imaj7",
-        rootInterval: 0,
-        suffix: "maj7",
-        deg: "Imaj7",
-        role: "Tonic",
-        desc: "기본 으뜸화음 (안정감)",
-        tensions: ["9", "13", "#11"],
-        upperIntervals: [0, 4, 7, 11],
+    // BASE_HARMONY는 구조만 정의. 텍스트는 런타임에 주입됨
+    const BASE_HARMONY_DEF = {
+      "Imaj7": { rootInterval: 0, suffix: "maj7", deg: "Imaj7", category: "inner", angleDeg: 270, tensions: ["9", "13", "#11"], upperIntervals: [0, 4, 7, 11],
         transitions: [
-          { targetId: "iim7", label: "서브도미넌트 대리 (ii)" },
-          { targetId: "IVmaj7", label: "서브도미넌트 (IV)" },
-          { targetId: "V7_ii", label: "세컨더리 도미넌트 (V/ii)" },
-          { targetId: "V7_vi", label: "세컨더리 도미넌트 (V/vi)" },
-          { targetId: "V7", label: "도미넌트 (V)" }
+          { targetId: "iim7", tag: "ii-V", type: "diatonic" },
+          { targetId: "IVmaj7", tag: "IV", type: "diatonic" },
+          { targetId: "V7_ii", tag: "V/ii", type: "secondary" },
+          { targetId: "SubV7_ii", tag: "Sub/ii", type: "subv" },
+          { targetId: "ivm7", tag: "SDM", type: "sdm" }
         ]
       },
-      "iim7": {
-        id: "iim7",
-        rootInterval: 2,
-        suffix: "m7",
-        deg: "iim7",
-        role: "Subdominant",
-        desc: "2도 마이너, ii-V 진행의 시작점",
-        tensions: ["9", "11"],
-        upperIntervals: [0, 3, 7, 10],
+      "iim7": { rootInterval: 2, suffix: "m7", deg: "iim7", category: "inner", angleDeg: 30, tensions: ["9", "11"], upperIntervals: [0, 3, 7, 10],
         transitions: [
-          { targetId: "V7", label: "도미넌트 모션 (V7)" }
+          { targetId: "V7", tag: "V7", type: "dominant" },
+          { targetId: "SubV7", tag: "SubV7", type: "subv" },
+          { targetId: "bVII7", tag: "Backdoor", type: "sdm" }
         ]
       },
-      "iiim7": {
-        id: "iiim7",
-        rootInterval: 4,
-        suffix: "m7",
-        deg: "iiim7",
-        role: "Tonic",
-        desc: "토닉 대리 화음 (약한 안정감)",
-        tensions: ["9", "11"],
-        upperIntervals: [0, 3, 7, 10],
+      "iiim7": { rootInterval: 4, suffix: "m7", deg: "iiim7", category: "inner", angleDeg: 90, tensions: ["9", "11"], upperIntervals: [0, 3, 7, 10],
         transitions: [
-          { targetId: "vim7", label: "vi 진행" },
-          { targetId: "IVmaj7", label: "서브도미넌트 (IV)" },
-          { targetId: "V7_ii", label: "세컨더리 도미넌트 (V/ii)" }
+          { targetId: "vim7", tag: "vi", type: "diatonic" },
+          { targetId: "V7_vi", tag: "V/vi", type: "secondary" },
+          { targetId: "IVmaj7", tag: "IV", type: "diatonic" }
         ]
       },
-      "IVmaj7": {
-        id: "IVmaj7",
-        rootInterval: 5,
-        suffix: "maj7",
-        deg: "IVmaj7",
-        role: "Subdominant",
-        desc: "밝은 발전감과 이동감을 제공",
-        tensions: ["9", "#11", "13"],
-        upperIntervals: [0, 4, 7, 11],
+      "IVmaj7": { rootInterval: 5, suffix: "maj7", deg: "IVmaj7", category: "inner", angleDeg: 210, tensions: ["9", "#11", "13"], upperIntervals: [0, 4, 7, 11],
         transitions: [
-          { targetId: "V7", label: "도미넌트 (V7)" },
-          { targetId: "iiim7", label: "토닉 대리 (iii)" }
+          { targetId: "ivm7", tag: "ivm", type: "sdm" },
+          { targetId: "V7", tag: "V7", type: "dominant" },
+          { targetId: "SubV7", tag: "SubV7", type: "subv" },
+          { targetId: "iiim7", tag: "iii", type: "diatonic" }
         ]
       },
-      "V7": {
-        id: "V7",
-        rootInterval: 7,
-        suffix: "7",
-        deg: "V7",
-        role: "Dominant",
-        desc: "강한 긴장감 및 I로 해결하려는 성질",
-        tensions: ["9", "b9", "#9", "#11", "b13", "13"],
-        upperIntervals: [0, 4, 7, 10],
+      "V7": { rootInterval: 7, suffix: "7", deg: "V7", category: "inner", angleDeg: 330, tensions: ["9", "b9", "#9", "#11", "b13", "13"], upperIntervals: [0, 4, 7, 10],
         transitions: [
-          { targetId: "Imaj7", label: "토닉 해결 (Authentic)" },
-          { targetId: "vim7", label: "거짓마침 (Deceptive)" }
+          { targetId: "Imaj7", tag: "I", type: "diatonic" },
+          { targetId: "vim7", tag: "vi", type: "diatonic" }
         ]
       },
-      "vim7": {
-        id: "vim7",
-        rootInterval: 9,
-        suffix: "m7",
-        deg: "vim7",
-        role: "Tonic",
-        desc: "토닉 대리 (평행단조 으뜸화음)",
-        tensions: ["9", "11"],
-        upperIntervals: [0, 3, 7, 10],
+      "vim7": { rootInterval: 9, suffix: "m7", deg: "vim7", category: "inner", angleDeg: 150, tensions: ["9", "11"], upperIntervals: [0, 3, 7, 10],
         transitions: [
-          { targetId: "iim7", label: "ii 진행" },
-          { targetId: "V7_V", label: "세컨더리 도미넌트 (V/V)" },
-          { targetId: "IVmaj7", label: "서브도미넌트 (IV)" }
+          { targetId: "iim7", tag: "ii", type: "diatonic" },
+          { targetId: "V7_ii", tag: "V/ii", type: "secondary" },
+          { targetId: "SubV7_ii", tag: "Sub/ii", type: "subv" },
+          { targetId: "IVmaj7", tag: "IV", type: "diatonic" }
         ]
       },
-      "V7_ii": {
-        id: "V7_ii",
-        rootInterval: 9,
-        suffix: "7",
-        deg: "V7/ii",
-        role: "Secondary Dominant",
-        desc: "iim7으로 강력히 향하는 세컨더리 화음",
-        tensions: ["b9", "#9", "b13"],
-        upperIntervals: [0, 4, 7, 10],
+      "SubV7": { rootInterval: 1, suffix: "7", deg: "SubV7", category: "outer", angleDeg: 300, tensions: ["9", "#11", "13"], upperIntervals: [0, 4, 7, 10],
         transitions: [
-          { targetId: "iim7", label: "목표 해결 (-> ii)" }
+          { targetId: "Imaj7", tag: "bII→I", type: "subv" }
         ]
       },
-      "V7_V": {
-        id: "V7_V",
-        rootInterval: 2,
-        suffix: "7",
-        deg: "V7/V",
-        role: "Secondary Dominant",
-        desc: "V7으로 강력히 향하는 세컨더리 화음",
-        tensions: ["9", "#11", "13"],
-        upperIntervals: [0, 4, 7, 10],
+      "SubV7_ii": { rootInterval: 3, suffix: "7", deg: "SubV7/ii", category: "outer", angleDeg: 0, tensions: ["9", "#11", "13"], upperIntervals: [0, 4, 7, 10],
         transitions: [
-          { targetId: "V7", label: "도미넌트 해결 (-> V)" }
+          { targetId: "iim7", tag: "bIII→ii", type: "subv" }
         ]
       },
-      "V7_vi": {
-        id: "V7_vi",
-        rootInterval: 4,
-        suffix: "7",
-        deg: "V7/vi",
-        role: "Secondary Dominant",
-        desc: "vim7으로 향하는 화음",
-        tensions: ["b9", "b13"],
-        upperIntervals: [0, 4, 7, 10],
+      "V7_ii": { rootInterval: 9, suffix: "7", deg: "V7/ii", category: "outer", angleDeg: 60, tensions: ["b9", "#9", "b13"], upperIntervals: [0, 4, 7, 10],
         transitions: [
-          { targetId: "vim7", label: "목표 해결 (-> vi)" }
+          { targetId: "iim7", tag: "V→ii", type: "secondary" }
+        ]
+      },
+      "V7_vi": { rootInterval: 4, suffix: "7", deg: "V7/vi", category: "outer", angleDeg: 120, tensions: ["b9", "b13"], upperIntervals: [0, 4, 7, 10],
+        transitions: [
+          { targetId: "vim7", tag: "V→vi", type: "secondary" }
+        ]
+      },
+      "ivm7": { rootInterval: 5, suffix: "m7", deg: "ivm7 (SDM)", category: "outer", angleDeg: 180, tensions: ["9", "11"], upperIntervals: [0, 3, 7, 10],
+        transitions: [
+          { targetId: "Imaj7", tag: "iv→I", type: "sdm" },
+          { targetId: "bVII7", tag: "iv→bVII", type: "sdm" }
+        ]
+      },
+      "bVII7": { rootInterval: 10, suffix: "7", deg: "bVII7", category: "outer", angleDeg: 240, tensions: ["9", "#11", "13"], upperIntervals: [0, 4, 7, 10],
+        transitions: [
+          { targetId: "Imaj7", tag: "bVII→I", type: "sdm" }
         ]
       }
     };
+    
+    // 역할별 다국어 매핑을 위한 하드코딩
+    const CHORD_ROLES = {
+        "Imaj7": "Tonic",
+        "iim7": "Subdominant",
+        "iiim7": "Tonic Sub",
+        "IVmaj7": "Subdominant",
+        "V7": "Dominant",
+        "vim7": "Tonic Sub",
+        "SubV7": "Substitute Dominant",
+        "SubV7_ii": "Substitute Dominant",
+        "V7_ii": "Secondary Dominant",
+        "V7_vi": "Secondary Dominant",
+        "ivm7": "SDM Substitution",
+        "bVII7": "SDM Substitution"
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+          el.textContent = TRANSLATIONS[lang][key];
+        }
+      });
+
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      
+      localStorage.setItem('preferred-lang', lang);
+      
+      // 언어 변경 후 데이터 및 UI 업데이트
+      CHORD_DATA = buildRuntimeChordData();
+      updateSidebar(selectedChordId);
+    }
+
+    function getTranslatedText(category, key) {
+        return TRANSLATIONS[currentLang][category][key] || key;
+    }
 
     function midiToFreq(midi) {
       return 440 * Math.pow(2, (midi - 69) / 12);
@@ -594,7 +732,6 @@
       notes.push(midiToFreq(bassMidi));
 
       let rawUpperMidis = upperIntervals.map(semi => chordRootMidi + semi);
-      
       activeTensions.forEach(t => {
         if (TENSION_SEMITONES[t]) {
           rawUpperMidis.push(chordRootMidi + TENSION_SEMITONES[t]);
@@ -603,8 +740,8 @@
 
       rawUpperMidis.forEach(midi => {
         let normalized = midi;
-        while (normalized < 55) normalized += 12;
-        while (normalized > 75) normalized -= 12;
+        while (normalized < 54) normalized += 12;
+        while (normalized > 76) normalized -= 12;
         notes.push(midiToFreq(normalized));
       });
 
@@ -616,14 +753,31 @@
       const baseMidiC3 = 48;
       const tonicMidi = baseMidiC3 + currentKeyOffset;
 
-      Object.keys(BASE_HARMONY).forEach(id => {
-        const item = BASE_HARMONY[id];
+      Object.keys(BASE_HARMONY_DEF).forEach(id => {
+        const item = BASE_HARMONY_DEF[id];
         const chordRootMidi = tonicMidi + item.rootInterval;
         const name = getChordName(item.rootInterval, item.suffix);
         const notes = calculateVoicing(chordRootMidi, item.upperIntervals);
+        
+        // 다국어 처리
+        const roleStr = CHORD_ROLES[id];
+        const roleTranslated = getTranslatedText("roles", roleStr);
+        const descTranslated = getTranslatedText("descs", id);
+
+        const transitions = item.transitions.map(t => {
+            const labelKey = `${id}_${t.targetId}`;
+            return {
+                ...t,
+                label: getTranslatedText("labels", labelKey)
+            }
+        });
 
         data[id] = {
           ...item,
+          id: id,
+          role: roleTranslated,
+          desc: descTranslated,
+          transitions: transitions,
           name: name,
           chordRootMidi: chordRootMidi,
           notes: notes
@@ -632,7 +786,7 @@
       return data;
     }
 
-    let CHORD_DATA = buildRuntimeChordData();
+    let CHORD_DATA;
     let selectedChordId = null;
     let progression = [];
     let bpm = 90;
@@ -641,13 +795,24 @@
     const ctx = canvas.getContext("2d");
     let width, height;
     const nodes = {};
-    const harmonyIds = Object.keys(BASE_HARMONY);
+    let harmonyIds = [];
 
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
     let activeNodes = [];
     let playbackTimeouts = [];
     let isPlaying = false;
+
+    function initData() {
+        harmonyIds = Object.keys(BASE_HARMONY_DEF);
+        const savedLang = localStorage.getItem('preferred-lang');
+        if (savedLang) {
+          setLanguage(savedLang);
+        } else {
+          const userLang = navigator.language || navigator.userLanguage;
+          setLanguage(userLang.startsWith('ko') ? 'ko' : 'en');
+        }
+    }
 
     function resize() {
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -656,7 +821,6 @@
       width = rect.width;
       height = rect.height;
 
-      // 캔버스 레티나 해상도 스케일링
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = width + "px";
@@ -674,78 +838,94 @@
       const centerX = width / 2;
       const centerY = height / 2;
 
-      // 모바일/데스크톱 화면 크기에 따라 원형 궤도 및 노드 크기 반응형 조절
-      const radius = minDim * (width < 500 ? 0.38 : 0.36);
-      const dynamicNodeRadius = Math.max(18, Math.min(36, minDim * 0.08));
+      const isMobile = width < 500;
+      const innerRadius = minDim * (isMobile ? 0.22 : 0.24);
+      const outerRadius = minDim * (isMobile ? 0.41 : 0.41);
+      const dynamicNodeRadius = Math.max(16, Math.min(26, minDim * 0.055));
 
-      harmonyIds.forEach((id, idx) => {
-        const angle = (idx / harmonyIds.length) * Math.PI * 2 - Math.PI / 2;
+      harmonyIds.forEach(id => {
+        const item = CHORD_DATA[id];
+        const rad = (item.angleDeg * Math.PI) / 180;
+        const r = item.category === "inner" ? innerRadius : outerRadius;
+
         nodes[id] = {
-          x: centerX + Math.cos(angle) * radius,
-          y: centerY + Math.sin(angle) * radius,
+          x: centerX + Math.cos(rad) * r,
+          y: centerY + Math.sin(rad) * r,
           r: dynamicNodeRadius,
           id: id
         };
       });
     }
 
-    function getRoleColor(role) {
-      switch (role) {
-        case "Tonic": return "#10b981";
-        case "Subdominant": return "#3b82f6";
-        case "Dominant": return "#ef4444";
-        case "Secondary Dominant": return "#eab308";
-        default: return "#64748b";
-      }
+    // 색상 판별은 번역되지 않은 키값(CHORD_ROLES) 기준으로 유지
+    function getRoleColor(id) {
+      const role = CHORD_ROLES[id];
+      if (role.includes("Tonic")) return "#10b981";
+      if (role.includes("Subdominant")) return "#3b82f6";
+      if (role.includes("Dominant") && !role.includes("Sub") && !role.includes("Sec")) return "#ef4444";
+      if (role.includes("Secondary")) return "#eab308";
+      if (role.includes("Substitute")) return "#a855f7";
+      if (role.includes("SDM")) return "#ec4899";
+      return "#64748b";
     }
 
-    function drawArrow(x1, y1, x2, y2, label, isHighlight) {
-      const isSmall = width < 500;
-      const headlen = isSmall ? 7 : 10;
-      const angle = Math.atan2(y2 - y1, x2 - x1);
-      const nodeRadius = nodes[harmonyIds[0]] ? nodes[harmonyIds[0]].r : 30;
-      const offset = nodeRadius + 3;
+    function getArrowColor(type) {
+      if (type === "subv") return "#c084fc";
+      if (type === "sdm") return "#f472b6";
+      if (type === "secondary") return "#facc15";
+      if (type === "dominant") return "#f87171";
+      return "#38bdf8";
+    }
 
-      const startX = x1 + Math.cos(angle) * offset;
-      const startY = y1 + Math.sin(angle) * offset;
-      const endX = x2 - Math.cos(angle) * offset;
-      const endY = y2 - Math.sin(angle) * offset;
+    function drawCurvedArrow(p1, p2, isHighlight, type = "diatonic", curveOffset = 18) {
+      const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+      const nodeR = p1.r || 22;
+
+      const startX = p1.x + Math.cos(angle) * (nodeR + 2);
+      const startY = p1.y + Math.sin(angle) * (nodeR + 2);
+      const endX = p2.x - Math.cos(angle) * (nodeR + 4);
+      const endY = p2.y - Math.sin(angle) * (nodeR + 4);
+
+      const midX = (startX + endX) / 2;
+      const midY = (startY + endY) / 2;
+      const normX = -(endY - startY);
+      const normY = endX - startX;
+      const len = Math.hypot(normX, normY) || 1;
+      const cpX = midX + (normX / len) * (isHighlight ? curveOffset : 0);
+      const cpY = midY + (normY / len) * (isHighlight ? curveOffset : 0);
+
+      const strokeColor = isHighlight ? getArrowColor(type) : "rgba(100, 116, 139, 0.12)";
 
       ctx.save();
-      ctx.strokeStyle = isHighlight ? "#38bdf8" : "rgba(100, 116, 139, 0.25)";
-      ctx.lineWidth = isHighlight ? (isSmall ? 2 : 2.5) : 1;
-      ctx.setLineDash(isHighlight ? [] : [3, 3]);
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = isHighlight ? 2.5 : 0.8;
+      ctx.setLineDash(isHighlight ? [] : [2, 3]);
+
+      if (isHighlight) {
+        ctx.shadowColor = strokeColor;
+        ctx.shadowBlur = 8;
+      }
 
       ctx.beginPath();
       ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
+      if (isHighlight) {
+        ctx.quadraticCurveTo(cpX, cpY, endX, endY);
+      } else {
+        ctx.lineTo(endX, endY);
+      }
       ctx.stroke();
 
       if (isHighlight) {
-        ctx.fillStyle = "#38bdf8";
+        const headAngle = Math.atan2(endY - cpY, endX - cpX);
+        const headlen = 9;
+
+        ctx.fillStyle = strokeColor;
         ctx.beginPath();
         ctx.moveTo(endX, endY);
-        ctx.lineTo(endX - headlen * Math.cos(angle - Math.PI / 6), endY - headlen * Math.sin(angle - Math.PI / 6));
-        ctx.lineTo(endX - headlen * Math.cos(angle + Math.PI / 6), endY - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.lineTo(endX - headlen * Math.cos(headAngle - Math.PI / 6), endY - headlen * Math.sin(headAngle - Math.PI / 6));
+        ctx.lineTo(endX - headlen * Math.cos(headAngle + Math.PI / 6), endY - headlen * Math.sin(headAngle + Math.PI / 6));
         ctx.closePath();
         ctx.fill();
-
-        const midX = (startX + endX) / 2;
-        const midY = (startY + endY) / 2;
-        const fontSize = isSmall ? 9 : 11;
-        ctx.font = `${fontSize}px sans-serif`;
-        const textWidth = ctx.measureText(label).width;
-
-        ctx.fillStyle = "#0f172a";
-        ctx.fillRect(midX - textWidth / 2 - 3, midY - (fontSize * 0.8), textWidth + 6, fontSize * 1.6);
-        ctx.strokeStyle = "#38bdf8";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(midX - textWidth / 2 - 3, midY - (fontSize * 0.8), textWidth + 6, fontSize * 1.6);
-
-        ctx.fillStyle = "#f8fafc";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(label, midX, midY);
       }
       ctx.restore();
     }
@@ -754,30 +934,36 @@
       ctx.clearRect(0, 0, width, height);
       const currentHarmony = selectedChordId ? CHORD_DATA[selectedChordId] : null;
 
+      // 비활성 배경 가이드선
       harmonyIds.forEach(id => {
         const n = nodes[id];
         const data = CHORD_DATA[id];
+        if (!n) return;
         data.transitions.forEach(t => {
           if (nodes[t.targetId] && id !== selectedChordId) {
-            drawArrow(n.x, n.y, nodes[t.targetId].x, nodes[t.targetId].y, t.label, false);
+            drawCurvedArrow(n, nodes[t.targetId], false, t.type, 0);
           }
         });
       });
 
-      if (currentHarmony) {
-        currentHarmony.transitions.forEach(t => {
+      // 선택된 노드의 활성 연결선
+      if (currentHarmony && nodes[selectedChordId]) {
+        currentHarmony.transitions.forEach((t, idx) => {
           if (nodes[t.targetId]) {
-            drawArrow(nodes[selectedChordId].x, nodes[selectedChordId].y, nodes[t.targetId].x, nodes[t.targetId].y, t.label, true);
+            const curveOffset = ((idx % 2 === 0 ? 1 : -1) * (14 + idx * 3));
+            drawCurvedArrow(nodes[selectedChordId], nodes[t.targetId], true, t.type, curveOffset);
           }
         });
       }
 
-      const isSmall = width < 500;
-      const nameFontSize = isSmall ? 10 : 13;
-      const degFontSize = isSmall ? 8 : 10;
+      // 노드 렌더링
+      const isMobile = width < 500;
+      const nameFontSize = isMobile ? 9.5 : 11;
+      const degFontSize = isMobile ? 7 : 8.5;
 
       harmonyIds.forEach(id => {
         const n = nodes[id];
+        if (!n) return;
         const data = CHORD_DATA[id];
         const isSelected = id === selectedChordId;
         const isTarget = currentHarmony && currentHarmony.transitions.some(t => t.targetId === id);
@@ -786,21 +972,26 @@
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
 
-        ctx.fillStyle = isSelected ? "#38bdf8" : (isTarget ? "#1e293b" : "#0f172a");
+        ctx.fillStyle = isSelected ? "#38bdf8" : (isTarget ? "#1e293b" : "#0d1424");
         ctx.fill();
 
-        ctx.lineWidth = isSelected ? (isSmall ? 3 : 4) : (isTarget ? 2 : 1.5);
-        ctx.strokeStyle = isSelected ? "#ffffff" : getRoleColor(data.role);
+        ctx.lineWidth = isSelected ? 3 : (isTarget ? 2 : 1.2);
+        ctx.strokeStyle = isSelected ? "#ffffff" : getRoleColor(id);
+        
+        if (isSelected) {
+          ctx.shadowColor = "#38bdf8";
+          ctx.shadowBlur = 12;
+        }
         ctx.stroke();
 
         ctx.textAlign = "center";
-        ctx.fillStyle = isSelected ? "#0f172a" : "#f8fafc";
+        ctx.fillStyle = isSelected ? "#090d16" : "#f8fafc";
         ctx.font = `bold ${nameFontSize}px sans-serif`;
-        ctx.fillText(data.name, n.x, n.y - (isSmall ? 2 : 4));
+        ctx.fillText(data.name, n.x, n.y - (isMobile ? 2 : 3));
 
-        ctx.font = `${degFontSize}px sans-serif`;
-        ctx.fillStyle = isSelected ? "#0f172a" : "#94a3b8";
-        ctx.fillText(data.deg, n.x, n.y + (isSmall ? 9 : 12));
+        ctx.font = `600 ${degFontSize}px sans-serif`;
+        ctx.fillStyle = isSelected ? "#090d16" : "#94a3b8";
+        ctx.fillText(data.deg, n.x, n.y + (isMobile ? 8 : 9));
 
         ctx.restore();
       });
@@ -819,17 +1010,17 @@
 
       const filter = audioCtx.createBiquadFilter();
       filter.type = "lowpass";
-      filter.frequency.setValueAtTime(Math.min(freq * 5, 2400), startTime);
-      filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.2, 180), startTime + duration);
+      filter.frequency.setValueAtTime(Math.min(freq * 4.5, 2200), startTime);
+      filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 1.1, 160), startTime + duration);
 
       const gainSine = audioCtx.createGain();
       gainSine.gain.setValueAtTime(0.0001, startTime);
-      gainSine.gain.linearRampToValueAtTime(0.07, startTime + 0.015);
+      gainSine.gain.linearRampToValueAtTime(0.065, startTime + 0.015);
       gainSine.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
       const gainTri = audioCtx.createGain();
       gainTri.gain.setValueAtTime(0.0001, startTime);
-      gainTri.gain.linearRampToValueAtTime(0.025, startTime + 0.01);
+      gainTri.gain.linearRampToValueAtTime(0.02, startTime + 0.01);
       gainTri.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.5);
 
       oscSine.connect(gainSine);
@@ -910,7 +1101,7 @@
       tensionBox.innerHTML = "";
       
       if (!availableTensions || availableTensions.length === 0) {
-        tensionBox.innerHTML = '<span class="tag" style="cursor: default;">노드를 먼저 선택하세요</span>';
+        tensionBox.innerHTML = `<span class="tag" style="cursor: default;">${TRANSLATIONS[currentLang]["tension-default"]}</span>`;
         return;
       }
 
@@ -926,12 +1117,47 @@
       });
     }
 
+    function getBadgeClass(type) {
+      if (type === "subv") return "badge-subv";
+      if (type === "sdm") return "badge-sdm";
+      if (type === "secondary") return "badge-secondary";
+      if (type === "dominant") return "badge-dominant";
+      return "badge-diatonic";
+    }
+
+    function updateRecommendationUI(transitions) {
+      const recomBox = document.getElementById("info-recom");
+      recomBox.innerHTML = "";
+
+      if (!transitions || transitions.length === 0) {
+        recomBox.innerHTML = `<span style="font-size: 0.72rem; color: #64748b;">${TRANSLATIONS[currentLang]["recom-default"]}</span>`;
+        return;
+      }
+
+      transitions.forEach(t => {
+        const targetData = CHORD_DATA[t.targetId];
+        const item = document.createElement("div");
+        item.className = "recom-item";
+        
+        item.innerHTML = `
+          <div class="recom-left">
+            <span class="recom-badge ${getBadgeClass(t.type)}">${t.tag || 'Flow'}</span>
+            <b>${targetData.name} <small style="color:#94a3b8">(${targetData.deg})</small></b>
+          </div>
+          <span style="color:#94a3b8; font-size:0.72rem;">${t.label} →</span>
+        `;
+        item.onclick = () => selectNode(t.targetId);
+        recomBox.appendChild(item);
+      });
+    }
+
     function updateSidebar(chordId) {
       if (!chordId) {
         document.getElementById("info-name").innerText = "-";
         const roleElem = document.getElementById("info-role");
         roleElem.style.display = "none";
-        document.getElementById("info-desc").innerText = "원하는 코드를 먼저 클릭하세요.";
+        document.getElementById("info-desc").innerText = TRANSLATIONS[currentLang]["desc-default"];
+        updateRecommendationUI([]);
         updateTensionTagsUI([], []);
         renderProgression();
         return;
@@ -946,13 +1172,19 @@
       roleElem.style.display = "inline-block";
       roleElem.innerText = data.role;
       roleElem.className = "chord-role";
-      if (data.role.includes("Tonic")) roleElem.classList.add("role-tonic");
-      else if (data.role.includes("Subdominant")) roleElem.classList.add("role-subdominant");
-      else if (data.role.includes("Dominant")) roleElem.classList.add("role-dominant");
-      else if (data.role.includes("Secondary")) roleElem.classList.add("role-secondary");
+
+      // 색상 매핑을 위해 원래 역할을 사용
+      const originalRole = CHORD_ROLES[chordId];
+      if (originalRole.includes("Tonic")) roleElem.classList.add("role-tonic");
+      else if (originalRole.includes("Subdominant")) roleElem.classList.add("role-subdominant");
+      else if (originalRole.includes("Dominant") && !originalRole.includes("Sub") && !originalRole.includes("Sec")) roleElem.classList.add("role-dominant");
+      else if (originalRole.includes("Secondary")) roleElem.classList.add("role-secondary");
+      else if (originalRole.includes("Substitute")) roleElem.classList.add("role-subv");
+      else if (originalRole.includes("SDM")) roleElem.classList.add("role-sdm");
 
       document.getElementById("info-desc").innerText = data.desc;
 
+      updateRecommendationUI(data.transitions);
       updateTensionTagsUI(data.tensions, currentProgItem ? currentProgItem.tensions : []);
       renderProgression();
     }
@@ -976,7 +1208,7 @@
       container.innerHTML = "";
 
       if (progression.length === 0) {
-        container.innerHTML = '<span style="font-size: 0.8rem; color: #64748b;">노드를 클릭해 진행을 추가하세요</span>';
+        container.innerHTML = `<span style="font-size: 0.72rem; color: #64748b;">${TRANSLATIONS[currentLang]["prog-default"]}</span>`;
         return;
       }
 
@@ -1020,7 +1252,6 @@
       draw();
     }
 
-    // 클릭 및 터치 이벤트 통합 처리
     function handlePointerClick(clientX, clientY) {
       const rect = canvas.getBoundingClientRect();
       const clickX = clientX - rect.left;
@@ -1028,8 +1259,9 @@
 
       harmonyIds.forEach(id => {
         const n = nodes[id];
+        if (!n) return;
         const dist = Math.hypot(clickX - n.x, clickY - n.y);
-        if (dist <= n.r * 1.15) { // 터치 편의성을 위해 클릭 판정 범위 살짝 확장
+        if (dist <= n.r * 1.3) {
           selectNode(id);
         }
       });
@@ -1107,9 +1339,9 @@
     window.addEventListener("resize", resize);
     window.addEventListener("orientationchange", () => setTimeout(resize, 100));
 
-    // 초기 실행
+    // 실행
+    initData();
     resize();
-    updateSidebar(null);
   </script>
 </body>
 </html>
