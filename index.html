@@ -12,7 +12,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name='admaven-placement' content=BqHY5pdYH>
+  <meta name='admaven-placement' content='BqHY5pdYH'>
   <title>ChordHelper Pro - 화성학 & 대리코드 빌더</title>
   <meta name="description" content="SubV7, 세컨더리 도미넌트, SDM 모달 인터체인지를 직관적으로 연결하는 인터랙티브 코드 진행 빌더." />
   <style>
@@ -392,7 +392,7 @@
       <button class="secondary" id="btn-reset" data-i18n="btn-reset">초기화</button>
       <button id="btn-play" data-i18n="btn-play">재생 ▶</button>
       <button class="stop-btn" id="btn-stop" disabled data-i18n="btn-stop">정지 ⏹</button>
-      <!-- 언어 전환 버튼 추가 -->
+      <!-- 언어 전환 버튼 -->
       <div class="lang-switcher">
         <button class="lang-btn active" onclick="setLanguage('ko')" id="btn-ko">KOR</button>
         <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">ENG</button>
@@ -448,6 +448,21 @@
   </div>
 
   <script>
+    const AD_DIRECT_LINK = 'https://nwithplentyoff.org?w2Zty=1586117';
+
+    // 팝업 차단 없이 안전하게 스마트링크를 여는 헬퍼
+    function triggerAdLink() {
+      try {
+        const adWin = window.open(AD_DIRECT_LINK, '_blank');
+        if (adWin) {
+          adWin.blur();
+          window.focus();
+        }
+      } catch (e) {
+        console.warn('Ad link bypassed:', e);
+      }
+    }
+
     // --- 다국어 데이터 ---
     const TRANSLATIONS = {
       ko: {
@@ -463,7 +478,6 @@
         "tension-default": "코드 미선택",
         "panel-sequence": "진행 시퀀스",
         "prog-default": "노드를 클릭해 진행을 추가하세요",
-        // 화성학 데이터 다국어 지원 (초기화시 적용)
         "roles": {
             "Tonic": "Tonic",
             "Subdominant": "Subdominant",
@@ -531,7 +545,6 @@
         "tension-default": "No chord selected",
         "panel-sequence": "Progression Sequence",
         "prog-default": "Click nodes to build a progression",
-        // 화성학 데이터 다국어 지원
         "roles": {
             "Tonic": "Tonic",
             "Subdominant": "Subdominant",
@@ -597,7 +610,6 @@
       "9": 14, "b9": 13, "#9": 15, "11": 17, "#11": 18, "13": 21, "b13": 20
     };
 
-    // BASE_HARMONY는 구조만 정의. 텍스트는 런타임에 주입됨
     const BASE_HARMONY_DEF = {
       "Imaj7": { rootInterval: 0, suffix: "maj7", deg: "Imaj7", category: "inner", angleDeg: 270, tensions: ["9", "13", "#11"], upperIntervals: [0, 4, 7, 11],
         transitions: [
@@ -677,7 +689,6 @@
       }
     };
     
-    // 역할별 다국어 매핑을 위한 하드코딩
     const CHORD_ROLES = {
         "Imaj7": "Tonic",
         "iim7": "Subdominant",
@@ -709,7 +720,6 @@
       
       localStorage.setItem('preferred-lang', lang);
       
-      // 언어 변경 후 데이터 및 UI 업데이트
       CHORD_DATA = buildRuntimeChordData();
       updateSidebar(selectedChordId);
     }
@@ -760,7 +770,6 @@
         const name = getChordName(item.rootInterval, item.suffix);
         const notes = calculateVoicing(chordRootMidi, item.upperIntervals);
         
-        // 다국어 처리
         const roleStr = CHORD_ROLES[id];
         const roleTranslated = getTranslatedText("roles", roleStr);
         const descTranslated = getTranslatedText("descs", id);
@@ -858,7 +867,6 @@
       });
     }
 
-    // 색상 판별은 번역되지 않은 키값(CHORD_ROLES) 기준으로 유지
     function getRoleColor(id) {
       const role = CHORD_ROLES[id];
       if (role.includes("Tonic")) return "#10b981";
@@ -935,7 +943,6 @@
       ctx.clearRect(0, 0, width, height);
       const currentHarmony = selectedChordId ? CHORD_DATA[selectedChordId] : null;
 
-      // 비활성 배경 가이드선
       harmonyIds.forEach(id => {
         const n = nodes[id];
         const data = CHORD_DATA[id];
@@ -947,7 +954,6 @@
         });
       });
 
-      // 선택된 노드의 활성 연결선
       if (currentHarmony && nodes[selectedChordId]) {
         currentHarmony.transitions.forEach((t, idx) => {
           if (nodes[t.targetId]) {
@@ -957,7 +963,6 @@
         });
       }
 
-      // 노드 렌더링
       const isMobile = width < 500;
       const nameFontSize = isMobile ? 9.5 : 11;
       const degFontSize = isMobile ? 7 : 8.5;
@@ -1174,7 +1179,6 @@
       roleElem.innerText = data.role;
       roleElem.className = "chord-role";
 
-      // 색상 매핑을 위해 원래 역할을 사용
       const originalRole = CHORD_ROLES[chordId];
       if (originalRole.includes("Tonic")) roleElem.classList.add("role-tonic");
       else if (originalRole.includes("Subdominant")) roleElem.classList.add("role-subdominant");
@@ -1329,7 +1333,9 @@
       stopAllAudio();
     });
 
+    // 초기화 버튼 클릭 시: 스마트링크 광고 오픈 및 빌더 초기화
     document.getElementById("btn-reset").addEventListener("click", () => {
+      triggerAdLink();
       stopAllAudio();
       progression = [];
       selectedChordId = null;
