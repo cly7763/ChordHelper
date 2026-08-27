@@ -329,65 +329,6 @@
       font-size: 0.68rem;
     }
 
-    /* 초기 잠금 광고 모달 스타일 */
-    .ad-lock-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(4, 7, 13, 0.88);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      padding: 1.25rem;
-    }
-    .ad-lock-box {
-      background: #0f172a;
-      border: 1px solid #38bdf8;
-      border-radius: 18px;
-      max-width: 400px;
-      width: 100%;
-      padding: 1.8rem 1.4rem;
-      text-align: center;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.8), 0 0 24px rgba(56, 189, 248, 0.15);
-    }
-    .ad-lock-icon {
-      font-size: 2.2rem;
-      margin-bottom: 0.6rem;
-      display: block;
-    }
-    .ad-lock-box h3 {
-      font-size: 1.2rem;
-      color: #f8fafc;
-      margin-bottom: 0.6rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .ad-lock-box p {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      line-height: 1.55;
-      margin-bottom: 1.4rem;
-      word-break: keep-all;
-    }
-    .ad-unlock-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-      color: #030712;
-      border: none;
-      padding: 0.85rem;
-      border-radius: 10px;
-      font-weight: 800;
-      cursor: pointer;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
-      transition: all 0.2s;
-    }
-    .ad-unlock-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
-    }
-
     /* 모바일 반응형 */
     @media (max-width: 768px) {
       #main-container {
@@ -417,18 +358,6 @@
   </style>
 </head>
 <body>
-
-  <!-- 첫 접속 시 기능 해금 안내 모달 -->
-  <div class="ad-lock-overlay" id="adLockModal">
-    <div class="ad-lock-box">
-      <span class="ad-lock-icon">🎹</span>
-      <h3 data-i18n="lock-title">ChordHelper Pro 시작하기</h3>
-      <p data-i18n="lock-desc">
-        무료로 고성능 화성학 분석기를 제공하기 위해 <strong>1회 광고 링크 확인 후</strong> 전체 기능이 즉시 해금됩니다.
-      </p>
-      <button class="ad-unlock-btn" onclick="unlockWithAd()" data-i18n="lock-btn">광고 확인하고 무료 해금 🔓</button>
-    </div>
-  </div>
 
   <header>
     <div class="brand-group">
@@ -518,26 +447,6 @@
   </div>
 
   <script>
-    const AD_DIRECT_LINK = 'https://nwithplentyoff.org?w2Zty=1586117';
-
-    // 1회 광고 확인 후 모달 닫기 및 기능 해금
-    function unlockWithAd() {
-      try {
-        const adWin = window.open(AD_DIRECT_LINK, '_blank');
-        if (adWin) {
-          adWin.blur();
-          window.focus();
-        }
-      } catch(e) {}
-      
-      const modal = document.getElementById('adLockModal');
-      if (modal) modal.style.display = 'none';
-      
-      // 오디오 컨텍스트 사전 준비
-      if (!audioCtx) audioCtx = new AudioContext();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-    }
-
     // --- 다국어 데이터 ---
     const TRANSLATIONS = {
       ko: {
@@ -553,9 +462,6 @@
         "tension-default": "코드 미선택",
         "panel-sequence": "진행 시퀀스",
         "prog-default": "노드를 클릭해 진행을 추가하세요",
-        "lock-title": "ChordHelper Pro 시작하기",
-        "lock-desc": "무료로 고성능 화성학 분석기를 제공하기 위해 <strong>1회 광고 링크 확인 후</strong> 전체 기능이 즉시 해금됩니다.",
-        "lock-btn": "광고 확인하고 무료 해금 🔓",
         "roles": {
             "Tonic": "Tonic",
             "Subdominant": "Subdominant",
@@ -623,9 +529,6 @@
         "tension-default": "No chord selected",
         "panel-sequence": "Progression Sequence",
         "prog-default": "Click nodes to build a progression",
-        "lock-title": "Start ChordHelper Pro",
-        "lock-desc": "To provide high-quality harmonic tools for free, all features unlock instantly after <strong>viewing 1 ads link</strong>.",
-        "lock-btn": "Check Sponsor & Free Unlock 🔓",
         "roles": {
             "Tonic": "Tonic",
             "Subdominant": "Subdominant",
@@ -792,11 +695,7 @@
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
-          if (key === 'lock-desc') {
-            el.innerHTML = TRANSLATIONS[lang][key];
-          } else {
-            el.textContent = TRANSLATIONS[lang][key];
-          }
+          el.textContent = TRANSLATIONS[lang][key];
         }
       });
 
@@ -1418,7 +1317,7 @@
       stopAllAudio();
     });
 
-    // 순수 초기화 로직만 실행 (광고 호출 제거)
+    // 초기화 버튼 클릭 시 즉시 리셋 실행
     document.getElementById("btn-reset").addEventListener("click", () => {
       stopAllAudio();
       progression = [];
